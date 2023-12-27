@@ -1,0 +1,70 @@
+{% load static %}
+
+<header id="header" class="vh-8 header overflow-hidden">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
+        <div class="container p-0 m-0 ms-3">
+
+            <!-- LOGO -->
+            <a class="navbar-brand fs-4" href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="100">
+            </a>       
+            
+            <!-- TOGGLE -->
+            <button class="navbar-toggler shadow-none border-0 hide-header" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar offcanvas offcanvas-start" tabindex="-1"
+            id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+                <!-- SIDEBAR HEADER -->
+                <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EXPOTEC</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <!-- SIDEBAR BODY -->
+                <div class="offcanvas-body flex-lg-rowp-lg-0 hide-header">
+                    <ul class="navbar-nav justify-content-end align-items-center fs-5 flex-grow-1 pe-3">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="">
+                                <span class="text">Edições</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s6">
+                                <span class="text">Anais</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s5">
+                                <span class="text">Contato</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s2">
+                                <span class="text">Normas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s4">
+                                <span class="text">Equipe</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s3">
+                                <span class="text">Áreas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="#s1">
+                                <span class="text">Início</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

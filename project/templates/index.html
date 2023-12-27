@@ -1,0 +1,277 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block content %}
+
+
+    <main class="main vh-100">
+        <section id="s1" class="s1 text-light d-flex flex-row">
+            <div class="comtainer hidden hide-back">                   
+                <div class="front text-center hide-front">
+                    <img class="p-0 m-0" src="{% static 'images/logo_white.png' %}" width="50%"></img>
+                    <p class="m-1 pb-2">Exposição Científica, Tecnológica e Cultural</p>
+                    <a href="#"><button class="btn m-1">Ver EXPOTEC Atual! </button></a>
+                </div>
+            </div>
+            <div class="px-5 text-center hidden hide-front2">
+                {% for Text in TextAP %}
+                <h2 class="a text-uppercase">{{Text.Título|safe}}</h2>
+                <p class="a ">{{Text.Texto|safe}}</p>
+                {% endfor %}
+            </div>
+        </section>
+        <section id="s3" class="s2 text-light text-center ">
+        <div class="main-section pt-5">
+            <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
+            <div class="mt-4 table-responsive d-flex justify-content-center">
+                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">NORMAS</th>
+                            <th scope="col">BAIXAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </section>
+        <section id="s4" class="s4 text-light text-center container">
+        <div class="main-section pt-5">
+            <h1 class="pt-3">EQUIPE DE PUBLICAÇÃO DE ANAIS</h1>
+            <div class="d-flex align-items-center justify-content-center text-center">
+                <div class="card__container swiper mt-4">
+                    <div class="card__content">
+                        <div class="swiper-wrapper">
+                            <article class="card__article d-flex flex-column swiper-slide align-items-center"">
+                                <div class="card__image">
+                                    <img src="{% static 'images/Foto_Perfil1.jpg' %}" alt="image" class="card__img">
+                                </div>
+                                <div class="card__data">
+                                    <h3 class="card__name text-uppercase">Tacicleide Vieira</h3>
+                                    <p class=" card__description text-center">Organizadora</p>
+                                </div>
+                            </article>
+                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
+                                <div class="card__image">
+                                    <img src="{% static 'images/Foto_Perfil3.jpg' %}" alt="image" class="card__img">
+                                </div>
+                                <div class="card__data">
+                                    <h3 class="card__name text-uppercase">Diego Cirilo</h3>
+                                    <p class=" card__description text-center">Linux Guy</p>
+                                </div>
+                            </article>
+                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
+                                <div class="card__image">
+                                    <img src="{% static 'images/Foto_Perfil2.jpg' %}" alt="image" class="card__img">
+                                </div>
+                                <div class="card__data">
+                                    <h3 class="card__name text-uppercase">Juliana Ribeiro</h3>
+                                    <p class=" card__description text-center">Desconheço</p>
+                                </div>
+                            </article>
+                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
+                                <div class="card__image">
+                                    <img src="{% static 'images/Foto_Perfil2.jpg' %}" alt="image" class="card__img">
+                                </div>
+                                <div class="card__data">
+                                    <h3 class="card__name text-uppercase">Random</h3>
+                                    <p class=" card__description text-center">Random
+                                    </p>
+                                </div>
+                            </article>
+                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
+                                <div class="card__image">
+                                    <img src="{% static 'images/Foto_Perfil1.jpg' %}" alt="image" class="card__img">
+                                </div>
+                                <div class="card__data">
+                                    <h3 class="card__name text-uppercase">Random</h3>
+                                    <p class=" card__description text-center">Random 2</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <!-- Navigation buttons -->
+                    <div class="swiper-button-next ps-4">
+                        <i class="fa-solid fa-angle-right fa-2x"></i>
+                    </div>
+                    
+                    <div class="swiper-button-prev">
+                        <i class="fa-solid fa-angle-left fa-2x"></i>
+                    </div>
+                        
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        </section>
+        <section id="s2" class="s2 text-light text-center">
+        <div class="main-section pt-5">
+            <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
+            <div class="mt-4 table-responsive d-flex justify-content-center">
+                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">NORMAS</th>
+                            <th scope="col">BAIXAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                        <tr scope="row">      
+                            <td>Template Pôster</td>
+                            <td><a href="#" class="more"> 
+                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                            </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </section>
+        <section class="text-light text-center">
+            <div class="main-section pt-5">
+                <h1>ANAIS</h1>
+                <div class="mt-1 table-responsive">
+                    <table id="myTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Área</th>
+                                <th>Equipe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Anal in Anais %}
+                            <tr>
+                                <td>{{Anal.Nome}}</td>
+                                <td>{{Anal.Área}}</td>
+                                <td>{{Anal.Equipe}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </section>
+
+        <section id="s6" class="s6 text-dark text-center">
+            <div class="contaimer justify-content-center pt-5">
+                <div class="infos my-4 ms-2">
+                    <div class="mt-2 d-flex justify-content-center">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3 class="m-2 text-center">
+                        ENDEREÇO
+                    </h3> 
+                    <p class="m-2 px-2">Av. Potengi, São Paulo do Potengi - RN, 59460-000</p>
+                </div>
+                <div class="infos my-4">
+                    <div class="mt-2 d-flex justify-content-center">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h3 class="m-2 text-center">
+                        TELEFONE
+                    </h3> 
+                    <p class="m-2 text-center">+55 (84) 4002 8922</p>
+                </div>
+                <div class="infos my-4 me-2">
+                    <div class="mt-2 d-flex justify-content-center">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h3 class="m-2 text-center">
+                        E-MAIL
+                    </h3> 
+                    <p class="m-2 text-center">IFRN@GMAIL.COM</p>
+                </div>
+            </div>
+            <div class="contato-box">
+                <div class="contato">
+                    <div id="infos2">
+                        <div class="d-flex flex-row">
+                            <div class="infos d-flex flex-row"> 
+                                <div class="mx-1">
+                                    <div class="mt-2">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <h3 class="m-2 text-center">ENDEREÇO</h3> 
+                                    <p class="m-2">Av. Potengi, São Paulo do Potengi - RN, 59460-000</p>
+                                </div>
+                                <div class="mx-1">
+                                    <div class="mt-2 justify-content-center">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <h3 class="m-2 text-center">TELEFONE</h3> 
+                                    <p class="m-2 text-center">+55 (84) 4002 8922</p>
+                                </div>
+                                <div class="mx-1">
+                                    <div class="mt-2 d-flex justify-content-center">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <h3 class="m-2 text-center">E-MAIL</h3> 
+                                    <p class="text-center">IFRN@GMAIL.COM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img">
+                        <img src="{% static 'images/if_contato.png' %}">
+                    </div>
+                    <div>
+                        {% for Text in TextCTT%}
+                            <h3>{{Text.Título|safe}}</h3>
+                            <h5>{{Text.Subtítulo|safe}}</h5>
+                            <p>{{Text.Texto|safe}}</p>
+                        {% endfor %}
+                        <a href="https://facebook.com"><i class="fa-brands fa-facebook bounce"></i></a>
+                        <a href="https://youtube.com"><i class="fa-brands fa-youtube bounce"></i></a>
+                        <a href="https://instagram.com"><i class="fa-brands fa-instagram-square bounce"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
