@@ -22,7 +22,7 @@ A página principal da publicação, além de apresentar o título em destaque, 
 Clone o projeto
 
 ```bash
-  git clone https://github.com/sergiorcd/anais_expotec
+  git clone https://github.com/sergiorcd/Expotec_ISSN
 ```
 
 Instale as dependências
