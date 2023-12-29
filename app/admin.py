@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import HTMLText, Anal
+from .models import *
 
 # Register your models here.
 
@@ -8,5 +8,7 @@ from .models import HTMLText, Anal
 class HTMLTextAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
     summernote_fields = '__all__'
 
-admin.site.register(HTMLText, HTMLTextAdmin)
-admin.site.register(Anal)
+admin.site.register(Textos, HTMLTextAdmin)
+admin.site.register(Normas)
+admin.site.register(Areas)
+admin.site.register(Artigos)
