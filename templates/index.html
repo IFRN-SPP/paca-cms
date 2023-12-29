@@ -4,65 +4,27 @@
 
 
     <main class="main vh-100">
-        <section id="s1" class="s1 text-light d-flex flex-row">
-            <div class="comtainer hidden hide-back">                   
+        <!-- | INÍCIO | -->
+        <section id="s1" class="s1 text-light d-flex">
+            <div class="comtainer hide-back">                   
                 <div class="front text-center hide-front">
                     <img class="p-0 m-0" src="{% static 'images/logo_white.png' %}" width="50%"></img>
                     <p class="m-1 pb-2">Exposição Científica, Tecnológica e Cultural</p>
                     <a href="#"><button class="btn m-1">Ver EXPOTEC Atual! </button></a>
                 </div>
             </div>
-            <div class="px-5 text-center hidden hide-front2">
+            <div class="px-5 text-center hide-front2">
                 {% for Text in TextAP %}
-                <h2 class="a text-uppercase">{{Text.Título|safe}}</h2>
-                <p class="a ">{{Text.Texto|safe}}</p>
+                <h2 class="a text-uppercase">{{Text.titulo|safe}}</h2>
+                <p class="a ">{{Text.texto|safe}}</p>
                 {% endfor %}
             </div>
         </section>
-        <section id="s3" class="s2 text-light text-center ">
+
+        <!-- | COMISSÃO | -->
+        <section id="s2" class="s2 text-light text-center container">
         <div class="main-section pt-5">
-            <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
-            <div class="mt-4 table-responsive d-flex justify-content-center">
-                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">NORMAS</th>
-                            <th scope="col">BAIXAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        </section>
-        <section id="s4" class="s4 text-light text-center container">
-        <div class="main-section pt-5">
-            <h1 class="pt-3">EQUIPE DE PUBLICAÇÃO DE ANAIS</h1>
+            <h1 class="pt-3">Comissão</h1>
             <div class="d-flex align-items-center justify-content-center text-center">
                 <div class="card__container swiper mt-4">
                     <div class="card__content">
@@ -130,52 +92,40 @@
             </div>
         </div>
         </section>
-        <section id="s2" class="s2 text-light text-center">
-        <div class="main-section pt-5">
-            <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
-            <div class="mt-4 table-responsive d-flex justify-content-center">
-                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">NORMAS</th>
-                            <th scope="col">BAIXAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                        <tr scope="row">      
-                            <td>Template Pôster</td>
-                            <td><a href="#" class="more"> 
-                                <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                            </a></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+        <!-- | NORMAS | -->
+        <section id="s3" class="s3 text-light text-center container-fluid">
+            <div class="main-section pt-5">
+                <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
+                <div class="mt-4 table-responsive d-flex justify-content-center">
+                    <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">NORMAS</th>
+                                <th scope="col">BAIXAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Norma in Normas %}
+                            <tr scope="row">      
+                                <td>{{Norma.norma}}</td>
+                                <td><a href="media/{{Norma.arquivo}}" download="name"> 
+                                    <i class="fa-solid fa-file-arrow-down fa-xl"></i>
+                                </a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
         </section>
-        <section class="text-light text-center">
+
+        <!-- | ANAIS | -->
+        <section id="s4" class="text-light text-center">
             <div class="main-section pt-5">
                 <h1>ANAIS</h1>
-                <div class="mt-1 table-responsive">
-                    <table id="myTable" class="display">
+                <div class="mt-1 table-responsive ">
+                    <table id="myTable" class="display container">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -197,7 +147,8 @@
             </div>
             </section>
 
-        <section id="s6" class="s6 text-dark text-center">
+        <!-- | CONTATO | -->
+        <section id="s5" class="s5 text-dark text-center">
             <div class="contaimer justify-content-center pt-5">
                 <div class="infos my-4 ms-2">
                     <div class="mt-2 d-flex justify-content-center">
@@ -260,10 +211,10 @@
                         <img src="{% static 'images/if_contato.png' %}">
                     </div>
                     <div>
-                        {% for Text in TextCTT%}
-                            <h3>{{Text.Título|safe}}</h3>
-                            <h5>{{Text.Subtítulo|safe}}</h5>
-                            <p>{{Text.Texto|safe}}</p>
+                        {% for Text in TextCTT %}
+                            <h3>{{Text.titulo|safe}}</h3>
+                            <h5>{{Text.subtitulo|safe}}</h5>
+                            <p>{{Text.texto|safe}}</p>
                         {% endfor %}
                         <a href="https://facebook.com"><i class="fa-brands fa-facebook bounce"></i></a>
                         <a href="https://youtube.com"><i class="fa-brands fa-youtube bounce"></i></a>

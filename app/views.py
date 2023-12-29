@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from .models import HTMLText, Anal
+from .models import *
 
 # Create your views here.
 def inicio(request):
-    Anais = Anal.objects.all
-    TextAP = HTMLText.objects.filter(Nome='Apresentação')
-    TextCTT = HTMLText.objects.filter(Nome='Contato')
+    Anais = Artigos.objects.all
+    Norma = Normas.objects.all
+    TextAP = Textos.objects.filter(nome='Apresentação')
+    TextCTT = Textos.objects.filter(nome='Contato')
     context = {
         'TextAP':TextAP, 
         'TextCTT': TextCTT,
-        'Anais': Anais
+        'Anais': Anais,
+        'Normas': Norma
     }
     return render(request, 'index.html', context)
