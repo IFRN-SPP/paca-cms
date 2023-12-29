@@ -14,28 +14,16 @@ A página principal da publicação, além de apresentar o título em destaque, 
   -Contato (constando o nome e endereço completo da instituição responsável pela publicação.)
 ```
 
-
-
-
 ## RODAR LOCALMENTE
 
 Clone o projeto
 
 ```bash
-  git clone https://github.com/sergiorcd/Expotec_ISSN
+  git clone https://github.com/IFRN-SPP/anais-expotec
 ```
 
 Instale as dependências
 
 ```bash
-  pip install django
+  pip install -r requirements.txt
 ```
-```bash
-  pip install django-summernote
-```
-
-
-## DOCUMENTAÇÃO
-
-[Documentação Expotec](https://docs.google.com/document/d/1a9-OCuwY4kH89WAaG1Oxt-QZYGrZHwaG4Z6QycsuBf0/edit)
-
