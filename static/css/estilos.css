@@ -129,14 +129,13 @@ header.rolagem a {
     display: inline-block;
 }
 
-.navbar a:hover {
+.navbar .nav-item a:hover {
     transform: translateY(-4px);
     color: var(--cyan);
     filter: drop-shadow(0 0 5px rgba(100, 100, 255, 0.525)) drop-shadow(0 0 5px var(--cyan));
 }
 
-.navbar a.active,
-.navbar a:active {
+.navbar .nav-item a.active {
     color: var(--cyan);
 }
 
@@ -361,14 +360,13 @@ header.rolagem a {
 
 .card__article {
     border-radius: 1.25rem;
-    background-color: var(--container-color);
 }
 
 .card__image {
     position: relative;
-    height: 180px;
+    height: 100%;
     width: 180px;
-    border-radius: 50%;
+    border-radius: 20%;
     background: white;
     padding: 3px;
     position: relative;
@@ -389,7 +387,7 @@ header.rolagem a {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 20%;
     border: 4px solid var(--blue);
 }
 

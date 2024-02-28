@@ -5,12 +5,16 @@ from .models import *
 def inicio(request):
     Anais = Artigos.objects.all
     Norma = Normas.objects.all
-    TextAP = Textos.objects.filter(nome='Apresentação')
-    TextCTT = Textos.objects.filter(nome='Contato')
+    Comission = Comissao.objects.all
+    Editions = Edicoes.objects.all
+    TextAP = Textos.objects.filter(titulo='Apresentação')
+    TextCTT = Textos.objects.filter(titulo='Contato')
     context = {
         'TextAP':TextAP, 
         'TextCTT': TextCTT,
         'Anais': Anais,
-        'Normas': Norma
+        'Normas': Norma,
+        'Comission': Comission,
+        'Editions': Editions
     }
     return render(request, 'index.html', context)

@@ -23,13 +23,22 @@ class Artigos(models.Model):
         return self.nome
     
 class Textos(models.Model):
-    nome = models.CharField(max_length=20, null=True)
     titulo = models.CharField(max_length=20, null=False)
     subtitulo = models.CharField(max_length=100, null=False)
     texto = models.TextField(null=False)
     class Meta:
         verbose_name = 'Texto'
         verbose_name_plural = 'Textos'
+    
+    def __str__(self):
+        return self.titulo
+    
+class Comissao(models.Model):
+    nome = models.CharField(max_length=20, null=True)
+    
+    class Meta:
+        verbose_name = 'Pessoa'
+        verbose_name_plural = 'Comissão'
     
     def __str__(self):
         return self.nome
@@ -41,6 +50,17 @@ class Normas(models.Model):
     class Meta:
         verbose_name = 'Norma'
         verbose_name_plural = 'Normas'
+    
+    def __str__(self):
+        return self.norma
+    
+class Edicoes(models.Model):
+    nome = models.CharField(max_length=20, null=True)
+    imagem = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
+    
+    class Meta:
+        verbose_name = 'Edição'
+        verbose_name_plural = 'Edições'
     
     def __str__(self):
         return self.nome

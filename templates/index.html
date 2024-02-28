@@ -25,70 +25,21 @@
         <section id="s2" class="s2 text-light text-center container">
         <div class="main-section pt-5">
             <h1 class="pt-3">Comissão</h1>
-            <div class="d-flex align-items-center justify-content-center text-center">
-                <div class="card__container swiper mt-4">
-                    <div class="card__content">
-                        <div class="swiper-wrapper">
-                            <article class="card__article d-flex flex-column swiper-slide align-items-center"">
-                                <div class="card__image">
-                                    <img src="{% static 'images/Foto_Perfil1.jpg' %}" alt="image" class="card__img">
-                                </div>
-                                <div class="card__data">
-                                    <h3 class="card__name text-uppercase">Tacicleide Vieira</h3>
-                                    <p class=" card__description text-center">Organizadora</p>
-                                </div>
-                            </article>
-                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
-                                <div class="card__image">
-                                    <img src="{% static 'images/Foto_Perfil3.jpg' %}" alt="image" class="card__img">
-                                </div>
-                                <div class="card__data">
-                                    <h3 class="card__name text-uppercase">Diego Cirilo</h3>
-                                    <p class=" card__description text-center">Linux Guy</p>
-                                </div>
-                            </article>
-                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
-                                <div class="card__image">
-                                    <img src="{% static 'images/Foto_Perfil2.jpg' %}" alt="image" class="card__img">
-                                </div>
-                                <div class="card__data">
-                                    <h3 class="card__name text-uppercase">Juliana Ribeiro</h3>
-                                    <p class=" card__description text-center">Desconheço</p>
-                                </div>
-                            </article>
-                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
-                                <div class="card__image">
-                                    <img src="{% static 'images/Foto_Perfil2.jpg' %}" alt="image" class="card__img">
-                                </div>
-                                <div class="card__data">
-                                    <h3 class="card__name text-uppercase">Random</h3>
-                                    <p class=" card__description text-center">Random
-                                    </p>
-                                </div>
-                            </article>
-                            <article class="card__article d-flex flex-column swiper-slide align-items-center" swiper-slide">
-                                <div class="card__image">
-                                    <img src="{% static 'images/Foto_Perfil1.jpg' %}" alt="image" class="card__img">
-                                </div>
-                                <div class="card__data">
-                                    <h3 class="card__name text-uppercase">Random</h3>
-                                    <p class=" card__description text-center">Random 2</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    <!-- Navigation buttons -->
-                    <div class="swiper-button-next ps-4">
-                        <i class="fa-solid fa-angle-right fa-2x"></i>
-                    </div>
-                    
-                    <div class="swiper-button-prev">
-                        <i class="fa-solid fa-angle-left fa-2x"></i>
-                    </div>
-                        
-                    <!-- Pagination -->
-                    <div class="swiper-pagination"></div>
-                </div>
+            <div class="mt-4 table-responsive d-flex justify-content-center">
+                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Pessoa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Pessoa in Comission %}
+                        <tr scope="row">      
+                            <td>{{Pessoa.nome}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
         </section>
@@ -146,7 +97,40 @@
                 </div>
             </div>
             </section>
-
+            
+        <!-- | EDIÇÕS | -->
+        <section id="s6" class="text-light text-center">
+            <div class="main-section pt-5">
+                <h1 class="pt-2">EDIÇÕES</h1>
+                <div class="d-flex align-items-center justify-content-center text-center">
+                    <div class="card__container swiper mt-4">
+                        <div class="card__content">
+                            <div class="swiper-wrapper">
+                                {% for Edicao in Editions  %}
+                                <article class="card__article d-flex flex-column swiper-slide align-items-center"">
+                                    <div class="card__image">
+                                        <img src="media/{{Edicao.imagem}}" alt="image" class="card__img">
+                                    </div>
+                                    <div class="card__data">
+                                        <h3 class="card__name text-uppercase">{{Edicao.nome}}</h3>
+                                    </div>
+                                </article>
+                                {% endfor %}
+                        <!-- Navigation buttons -->
+                        <div class="swiper-button-next ps-4">
+                            <i class="fa-solid fa-angle-right fa-2x"></i>
+                        </div>
+                        
+                        <div class="swiper-button-prev">
+                            <i class="fa-solid fa-angle-left fa-2x"></i>
+                        </div>
+                            
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            </section>
         <!-- | CONTATO | -->
         <section id="s5" class="s5 text-dark text-center">
             <div class="contaimer justify-content-center pt-5">
