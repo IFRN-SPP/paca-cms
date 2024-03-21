@@ -14,9 +14,9 @@
                 </div>
             </div>
             <div class="px-5 text-center hide-front2">
-                {% for Text in TextAP %}
-                <h2 class="a text-uppercase">{{Text.titulo|safe}}</h2>
-                <p class="a ">{{Text.texto|safe}}</p>
+                {% for text in textap %}
+                <h2 class="a text-uppercase">{{text.titulo|safe}}</h2>
+                <p class="a ">{{text.texto|safe}}</p>
                 {% endfor %}
             </div>
         </section>
@@ -33,9 +33,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for Pessoa in Comission %}
+                        {% for pessoa in comission %}
                         <tr scope="row">      
-                            <td>{{Pessoa.nome}}</td>
+                            <td>{{pessoa.nome}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -57,10 +57,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for Norma in Normas %}
+                            {% for norma in normas %}
                             <tr scope="row">      
-                                <td>{{Norma.norma}}</td>
-                                <td><a href="media/{{Norma.arquivo}}" download="name"> 
+                                <td>{{norma.norma}}</td>
+                                <td><a href="media/{{norma.arquivo}}" download="name"> 
                                     <i class="fa-solid fa-file-arrow-down fa-xl"></i>
                                 </a></td>
                             </tr>
@@ -85,11 +85,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for Anal in Anais %}
+                            {% for artigo in anais %}
                             <tr>
-                                <td>{{Anal.Nome}}</td>
-                                <td>{{Anal.Área}}</td>
-                                <td>{{Anal.Equipe}}</td>
+                                <td>{{artigo.nome}}</td>
+                                <td>{{artigo.area}}</td>
+                                <td>{{artigo.equipe}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -98,7 +98,7 @@
             </div>
             </section>
             
-        <!-- | EDIÇÕS | -->
+        <!-- | EDIÇÕES | -->
         <section id="s6" class="text-light text-center">
             <div class="main-section pt-5">
                 <h1 class="pt-2">EDIÇÕES</h1>
@@ -106,13 +106,13 @@
                     <div class="card__container swiper mt-4">
                         <div class="card__content">
                             <div class="swiper-wrapper">
-                                {% for Edicao in Editions  %}
+                                {% for edicao in editions  %}
                                 <article class="card__article d-flex flex-column swiper-slide align-items-center"">
                                     <div class="card__image">
-                                        <img src="media/{{Edicao.imagem}}" alt="image" class="card__img">
+                                        <img src="media/{{edicao.imagem}}" alt="image" class="card__img">
                                     </div>
                                     <div class="card__data">
-                                        <h3 class="card__name text-uppercase">{{Edicao.nome}}</h3>
+                                        <h3 class="card__name text-uppercase">{{edicao.nome}}</h3>
                                     </div>
                                 </article>
                                 {% endfor %}
@@ -195,10 +195,10 @@
                         <img src="{% static 'images/if_contato.png' %}">
                     </div>
                     <div>
-                        {% for Text in TextCTT %}
-                            <h3>{{Text.titulo|safe}}</h3>
-                            <h5>{{Text.subtitulo|safe}}</h5>
-                            <p>{{Text.texto|safe}}</p>
+                        {% for text in textctt %}
+                            <h3>{{text.titulo|safe}}</h3>
+                            <h5>{{text.subtitulo|safe}}</h5>
+                            <p>{{text.texto|safe}}</p>
                         {% endfor %}
                         <a href="https://facebook.com"><i class="fa-brands fa-facebook bounce"></i></a>
                         <a href="https://youtube.com"><i class="fa-brands fa-youtube bounce"></i></a>

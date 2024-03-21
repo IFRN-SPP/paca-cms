@@ -10,11 +10,11 @@ def inicio(request):
     TextAP = Textos.objects.filter(titulo='Apresentação')
     TextCTT = Textos.objects.filter(titulo='Contato')
     context = {
-        'TextAP':TextAP, 
-        'TextCTT': TextCTT,
-        'Anais': Anais,
-        'Normas': Norma,
-        'Comission': Comission,
-        'Editions': Editions
+        'textap':TextAP, 
+        'textctt': TextCTT,
+        'anais': Anais,
+        'normas': Norma,
+        'comission': Comission,
+        'editions': Editions
     }
     return render(request, 'index.html', context)
