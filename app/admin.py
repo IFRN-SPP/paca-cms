@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import *
+from django.contrib.auth.admin import UserAdmin
 
-# Register your models here.
+admin.site.register(User, UserAdmin)
 
 # Apply summernote to all TextField in model.
 class HTMLTextAdmin(SummernoteModelAdmin):  # instead of ModelAdmin

@@ -1,6 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
+class User(AbstractUser):
+    pass
+
+
 class Areas(models.Model):
     nome = models.CharField(max_length=60,unique=True,primary_key=True)
     
@@ -10,6 +15,8 @@ class Areas(models.Model):
     
     def __str__(self):
         return self.nome
+    
+
 class Artigos(models.Model):
     nome = models.CharField(max_length=255, null=False, blank=False)
     area = models.ForeignKey(Areas, on_delete=models.CASCADE)
@@ -22,6 +29,7 @@ class Artigos(models.Model):
     def __str__(self):
         return self.nome
     
+
 class Textos(models.Model):
     titulo = models.CharField(max_length=20, null=False)
     subtitulo = models.CharField(max_length=100, null=False)
@@ -33,6 +41,7 @@ class Textos(models.Model):
     def __str__(self):
         return self.titulo
     
+
 class Comissao(models.Model):
     nome = models.CharField(max_length=20, null=True)
     
@@ -43,6 +52,7 @@ class Comissao(models.Model):
     def __str__(self):
         return self.nome
     
+
 class Normas(models.Model):
     norma = models.CharField(max_length=20, null=True)
     arquivo = models.FileField()
@@ -54,6 +64,7 @@ class Normas(models.Model):
     def __str__(self):
         return self.norma
     
+
 class Edicoes(models.Model):
     nome = models.CharField(max_length=20, null=True)
     imagem = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
