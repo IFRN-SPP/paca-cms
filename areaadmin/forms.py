@@ -1,7 +1,8 @@
 from django import forms
-from app.models import *
+from app.models import Artigos
+
 
 class Form(forms.ModelForm):
     class Meta:
         model = Artigos
-        fields = ('nome', 'area', 'equipe')
+        fields = ("nome", "area", "equipe")
