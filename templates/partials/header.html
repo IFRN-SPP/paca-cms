@@ -6,7 +6,7 @@
 
             <!-- LOGO -->
             <a class="navbar-brand fs-4" href="#">
-                <img src="{% static 'images/logo.png' %}" alt="Logo" width="100">
+              <img src="{{ evento.logo.url }}" alt="Logo" width="100">
             </a>       
             
             <!-- TOGGLE -->
@@ -20,43 +20,20 @@
 
                 <!-- SIDEBAR HEADER -->
                 <div class="offcanvas-header text-white border-bottom">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EXPOTEC</h5>
+                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">{{ evento.nome_curto }}</h5>
                     <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
                 <!-- SIDEBAR BODY -->
                 <div class="offcanvas-body flex-lg-rowp-lg-0 hide-header">
                     <ul class="navbar-nav justify-content-end align-items-center fs-5 flex-grow-1 pe-3">
+                      {% for pagina in paginas %}
                         <li class="nav-item">
                             <a class="nav-link" href="#s1">
-                                <span class="text">Apresentação</span>
+                              <span class="text">{{ pagina.titulo }}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#s2">
-                                <span class="text">Comissão</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#s3">
-                                <span class="text">Normas</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#s4">
-                                <span class="text">Anais</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#s6">
-                                <span class="text">Edições</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#s5">
-                                <span class="text">Contato</span>
-                            </a>
-                        </li>
+                      {% endfor %}
                     </ul>
                 </div>
             </div>
