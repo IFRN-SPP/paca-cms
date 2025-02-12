@@ -1,10 +1,9 @@
-from .models import Evento
+from .models import Publication
 
 
-def evento_info(request):
-    evento = Evento.objects.first()
-    if evento:
-        response = {"evento": evento}
-    else:
-        return {}
+def publication_data(request):
+    publication = Publication.objects.first()
+    response = {}
+    if publication:
+        response = {"publication": publication}
     return response

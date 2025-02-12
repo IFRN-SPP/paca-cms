@@ -1,212 +1,63 @@
-{% extends "partials/base.html" %}
-{% load static %}
+{% extends 'public/base.html' %}
+{% load static i18n custom_tags %}
+{% block title %} Início {% endblock title %}
+
 {% block content %}
+  
+<header id="site-header" class="site-header valign-center" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
+  <div class="intro" >
+    <h1>{{ publication.title }}</h1>
+    <h4>ISSN: {{ publication.issn }} - DOI: {{ publication.doi }}</h4>
+    <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
+    <a class="btn btn-success text-light" data-scroll href="{% url 'issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
+  </div>
+</header>
 
+<section id="about" class="section about">
+  <div class="container">
+    <div class="row">
+      <h3 class="section-title text-center">Apresentação</h3>
+    </div>
+    {% if publication.description|length <= 1500 %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="text-justify">{{ publication.description|safe }}</div>
+      </div><!-- /.col-sm-6 -->
 
-    <main class="main vh-100">
-        <!-- | INÍCIO | -->
-        <section id="s1" class="s1 text-light d-flex">
-            <div class="comtainer hide-back">                   
-                <div class="front text-center hide-front">
-                    <img class="p-0 m-0" src="{% static 'images/logo_white.png' %}" width="50%"></img>
-                    <p class="m-1 pb-2">Exposição Científica, Tecnológica e Cultural</p>
-                    <a href="#"><button class="btn m-1">Ver EXPOTEC Atual! </button></a>
-                </div>
-            </div>
-            <div class="px-5 text-center hide-front2">
-                {% for text in textap %}
-                <h2 class="a text-uppercase">{{text.titulo|safe}}</h2>
-                <p class="a ">{{text.texto|safe}}</p>
-                {% endfor %}
-            </div>
-        </section>
+      <div class="col-md-6">
+        <figure>
+          {% if publication.promo_image %}
+          <img src="{{ publication.promo_image.url }}" class="img-fluid">
+          {% else %}
+          <img src="https://placehold.co/600x400/png?text=Promo Image" class="img-fluid">
+          {% endif %}
+        </figure>
+      </div><!-- /.col-sm-6 -->
+    </div><!-- /.row -->
+    {% else %}
+    <div class="row">
+    {% with publication.description|split_text as split_text %}
+      <div class="col-sm-6">
+        <div class="text-justify">{{ split_text.0 |safe}}</div>
+      </div><!-- /.col-sm-6 -->
 
-        <!-- | COMISSÃO | -->
-        <section id="s2" class="s2 text-light text-center container">
-        <div class="main-section pt-5">
-            <h1 class="pt-3">Comissão</h1>
-            <div class="mt-4 table-responsive d-flex justify-content-center">
-                <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">Pessoa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for pessoa in comission %}
-                        <tr scope="row">      
-                            <td>{{pessoa.nome}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        </section>
-
-        <!-- | NORMAS | -->
-        <section id="s3" class="s3 text-light text-center container-fluid">
-            <div class="main-section pt-5">
-                <h1 class="pt-4 m-0">BAIXAR NORMAS PARA PUBLICAÇÕES</h1>
-                <div class="mt-4 table-responsive d-flex justify-content-center">
-                    <table class="table table-dark table-borderless table-striped table-hover custom-table text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">NORMAS</th>
-                                <th scope="col">BAIXAR</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for norma in normas %}
-                            <tr scope="row">      
-                                <td>{{norma.norma}}</td>
-                                <td><a href="media/{{norma.arquivo}}" download="name"> 
-                                    <i class="fa-solid fa-file-arrow-down fa-xl"></i>
-                                </a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- | ANAIS | -->
-        <section id="s4" class="text-light text-center">
-            <div class="main-section pt-5">
-                <h1>ANAIS</h1>
-                <div class="mt-1 table-responsive ">
-                    <table id="myTable" class="display container">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Área</th>
-                                <th>Equipe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for artigo in anais %}
-                            <tr>
-                                <td>{{artigo.nome}}</td>
-                                <td>{{artigo.area}}</td>
-                                <td>{{artigo.equipe}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </section>
-            
-        <!-- | EDIÇÕES | -->
-        <section id="s6" class="text-light text-center">
-            <div class="main-section pt-5">
-                <h1 class="pt-2">EDIÇÕES</h1>
-                <div class="d-flex align-items-center justify-content-center text-center">
-                    <div class="card__container swiper mt-4">
-                        <div class="card__content">
-                            <div class="swiper-wrapper">
-                                {% for edicao in editions  %}
-                                <article class="card__article d-flex flex-column swiper-slide align-items-center"">
-                                    <div class="card__image">
-                                        <img src="media/{{edicao.imagem}}" alt="image" class="card__img">
-                                    </div>
-                                    <div class="card__data">
-                                        <h3 class="card__name text-uppercase">{{edicao.nome}}</h3>
-                                    </div>
-                                </article>
-                                {% endfor %}
-                        <!-- Navigation buttons -->
-                        <div class="swiper-button-next ps-4">
-                            <i class="fa-solid fa-angle-right fa-2x"></i>
-                        </div>
-                        
-                        <div class="swiper-button-prev">
-                            <i class="fa-solid fa-angle-left fa-2x"></i>
-                        </div>
-                            
-                        <!-- Pagination -->
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-            </div>
-            </section>
-        <!-- | CONTATO | -->
-        <section id="s5" class="s5 text-dark text-center">
-            <div class="contaimer justify-content-center pt-5">
-                <div class="infos my-4 ms-2">
-                    <div class="mt-2 d-flex justify-content-center">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                    <h3 class="m-2 text-center">
-                        ENDEREÇO
-                    </h3> 
-                    <p class="m-2 px-2">Av. Potengi, São Paulo do Potengi - RN, 59460-000</p>
-                </div>
-                <div class="infos my-4">
-                    <div class="mt-2 d-flex justify-content-center">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <h3 class="m-2 text-center">
-                        TELEFONE
-                    </h3> 
-                    <p class="m-2 text-center">+55 (84) 4002 8922</p>
-                </div>
-                <div class="infos my-4 me-2">
-                    <div class="mt-2 d-flex justify-content-center">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <h3 class="m-2 text-center">
-                        E-MAIL
-                    </h3> 
-                    <p class="m-2 text-center">IFRN@GMAIL.COM</p>
-                </div>
-            </div>
-            <div class="contato-box">
-                <div class="contato">
-                    <div id="infos2">
-                        <div class="d-flex flex-row">
-                            <div class="infos d-flex flex-row"> 
-                                <div class="mx-1">
-                                    <div class="mt-2">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                    </div>
-                                    <h3 class="m-2 text-center">ENDEREÇO</h3> 
-                                    <p class="m-2">Av. Potengi, São Paulo do Potengi - RN, 59460-000</p>
-                                </div>
-                                <div class="mx-1">
-                                    <div class="mt-2 justify-content-center">
-                                        <i class="fa-solid fa-phone"></i>
-                                    </div>
-                                    <h3 class="m-2 text-center">TELEFONE</h3> 
-                                    <p class="m-2 text-center">+55 (84) 4002 8922</p>
-                                </div>
-                                <div class="mx-1">
-                                    <div class="mt-2 d-flex justify-content-center">
-                                        <i class="fa-solid fa-envelope"></i>
-                                    </div>
-                                    <h3 class="m-2 text-center">E-MAIL</h3> 
-                                    <p class="text-center">IFRN@GMAIL.COM</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="img">
-                        <img src="{% static 'images/if_contato.png' %}">
-                    </div>
-                    <div>
-                        {% for text in textctt %}
-                            <h3>{{text.titulo|safe}}</h3>
-                            <h5>{{text.subtitulo|safe}}</h5>
-                            <p>{{text.texto|safe}}</p>
-                        {% endfor %}
-                        <a href="https://facebook.com"><i class="fa-brands fa-facebook bounce"></i></a>
-                        <a href="https://youtube.com"><i class="fa-brands fa-youtube bounce"></i></a>
-                        <a href="https://instagram.com"><i class="fa-brands fa-instagram-square bounce"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
+      <div class="col-sm-6">
+        <div class="text-justify">{{ split_text.1 |safe}}</div>
+      </div><!-- /.col-sm-6 -->
+    {% endwith %}
+    </div><!-- /.row -->
+    <div class="row">
+      <div class="col-sm-6 mx-auto">
+        <figure>
+        {% if publication.promo_image %}
+        <img src="{{ publication.promo_image.url }}" class="img-fluid">
+        {% else %}
+        <img src="https://placehold.co/600x400/png?text=Promo Image" class="img-fluid">
+        {% endif %}
+        </figure>
+      </div>
+    </div>
+    {% endif %}
+  </div><!-- /.container -->
+</section>
 {% endblock content %}

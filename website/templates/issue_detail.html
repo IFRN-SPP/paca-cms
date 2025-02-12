@@ -1,0 +1,31 @@
+{% extends 'public/base.html' %}
+{% load static %}
+{% block title %}Edição {{ issue.title }}{% endblock title %}
+{% block bodyclass %}bg-black single-page{% endblock bodyclass %}
+
+{% block content %}
+<section class="section about bg-white">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="section-title">{{ issue.title }}</h1>
+      <h2 class="section-title">Apresentação</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {{ issue.presentation | safe }}
+      <p>Data de publicação: {{ issue.pub_date }}</p>
+      <div class="list-group">
+        <div class="list-group-item bg-dark mb-2">
+            <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ issue.document.url}}" target="_blank">
+              <span class=" me-2"><i class="fas fa-download"></i></span>
+              Download
+            </a>
+        </div>
+      </div> 
+  </div>
+</div>
+   
+</section>
+{% endblock content %}

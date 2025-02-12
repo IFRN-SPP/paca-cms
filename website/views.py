@@ -1,15 +1,16 @@
-from django.views.generic.base import TemplateView
+from django.shortcuts import render, get_object_or_404
+from .models import Issue, Page
 
-from .models import Texto, Pagina
+
+def index(request):
+    return render(request, "index.html")
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+def pages(request, slug):
+    page = get_object_or_404(Page, slug=slug)
+    return render(request, "page.html", {"page": page})
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["paginas"] = Pagina.objects.all()
-        context["textap"] = Texto.objects.filter(titulo="Apresentação")
-        context["textctt"] = Texto.objects.filter(titulo="Contato")
 
-        return context
+def issue_detail(request, id):
+    issue = get_object_or_404(Issue, id=id)
+    return render(request, "issue_detail.html", {"issue": issue})

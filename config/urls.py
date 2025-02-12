@@ -19,9 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from website import views
 
 urlpatterns = [
-    path("", include("website.urls")),
+    path("", views.index, name="index"),
+    path("pages/<slug:slug>/", views.pages, name="pages"),
+    path("issues/<int:id>/", views.issue_detail, name="issue_detail"),
     path("accounts/", include("allauth.urls")),
     path("admin/", admin.site.urls),
     path("summernote/", include("django_summernote.urls")),

@@ -1,0 +1,43 @@
+{% extends 'public/base.html' %}
+{% load static i18n %}
+{% block title %} {{ page.title }} {% endblock title %}
+{% block bodyclass %}bg-black single-page{% endblock bodyclass %}
+
+{% block content %}
+<section class="section about bg-white">
+      <div class="container">
+
+          <div class="row">
+              <div class="col-md-12">
+                <h2 class="section-title">{{ page.title }}</h3>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+            {% for text in page.text_set.all %}
+              {% if text.is_published %}
+                <h1 class="section-title">{{ text.title }}</h1>
+                <h2 class="section-title">{{ text.subtitle }}</h2>
+                {{ text.text | safe }}
+              {% endif %}
+            {%empty%}
+              <h1>EM BREVE</h1>
+            {% endfor %}
+                {% comment %}<div class="list-group">{% endcomment %}
+                  {% comment %}{% for ed in evento.downloads %}{% endcomment %}
+                  {% comment %}<div class="list-group-item bg-dark mb-2">{% endcomment %}
+                      {% comment %}<a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ed.documento.file.url}}" target="_blank">{% endcomment %}
+                        {% comment %}<span class=" me-2"><i class="fas fa-download"></i></span>{% endcomment %}
+                        {% comment %}{{ed.documento.descricao}}{% endcomment %}
+                      {% comment %}</a>{% endcomment %}
+                  {% comment %}</div>{% endcomment %}
+                  {% comment %}{%empty%}{% endcomment %}
+                    {% comment %}<h1>EM BREVE</h1>{% endcomment %}
+                  {% comment %}{% endfor %}{% endcomment %}
+                {% comment %}</div> {% endcomment %}
+              </div>
+          </div>
+         
+  </section>
+  
+{% endblock content %}
