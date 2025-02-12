@@ -1,6 +1,6 @@
-# CMS para Anais de Eventos Científicos do IFRN
+# CMS para Periódicos do IFRN
 
-Esse é um sistema desenvolvido em Django como um CMS (*Content Management System*) específico para anais de eventos científicos/acadêmicos atendendo aos requisitos para obtenção de ISSN (*Internacional Standard Serial Number*).
+Esse é um sistema desenvolvido em Django como um CMS (*Content Management System*) específico para periódicos online, como anais de eventos científicos/acadêmicos, atendendo aos requisitos para obtenção de ISSN (*Internacional Standard Serial Number*).
 
 O sistema conta com autenticação via SUAP para usuários do IFRN.
 
@@ -12,11 +12,11 @@ Para a atribuição do ISSN foi solicitado:
 
 A página principal da publicação, além de apresentar o título em destaque, sem contar designação numérica do evento  deverá conter links para:
 
--Apresentação;
--Normas para publicação;
--Corpo editorial/Comissão organizadora;
--Edições (com área de numeração para cada edição);
--Contato (constando o nome e endereço completo da instituição responsável pela publicação.)
+- Apresentação;
+- Normas para publicação;
+- Corpo editorial/Comissão organizadora;
+- Edições (com área de numeração para cada edição);
+- Contato (constando o nome e endereço completo da instituição responsável pela publicação.)
 
 ### Referências
 
@@ -27,10 +27,6 @@ A página principal da publicação, além de apresentar o título em destaque, 
 
 - Clone o projeto
 
-```bash
-git clone https://github.com/IFRN-SPP/anais-expotec
-```
-
 - Instale as dependências
 
 ```bash
@@ -39,7 +35,7 @@ pip install -r requirements.txt
 
 - Configure o sistema copiando o `.env.exemplo` para `.env` e realizando as alterações necessárias, como configurar as chaves do SUAP, informações do banco de dados, etc.
 
-- Instale as migrations
+- Faça as migrations
 ```bash
 python manage.py migrate
 ```
@@ -50,6 +46,5 @@ python manage loaddata website/fixture/initial.json
 ```
 
 - Execute o servidor e acesse o sistema.
-- A interface de *admin* do Django está em `/djangoadmin` e a interface de administração do sistema em `/admin`. O usuário padrão do `/djangoadmin` é `admin` com a senha `1234` e o acesso ao `/admin` se dá apenas para usuários do SUAP habilitados no model `UsuarioAutorizado`.
 
-- A documentação completa do sistema se encontra em `/doc`.
+- A interface de *admin* do Django está em `/djangoadmin` e a interface de administração do sistema em `/admin`. O usuário padrão do `/djangoadmin` é `admin` com a senha `1234` e o acesso ao `/admin` se dá apenas para usuários do SUAP habilitados no model `UsuarioAutorizado`.
