@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
+from django.conf import settings
+from django_summernote.fields import SummernoteTextField
+import os
+import pymupdf
 
 
 class User(AbstractUser):
@@ -19,7 +23,7 @@ class Publication(models.Model):
     address = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=100, blank=True)
     email = models.EmailField(blank=True)
-    description = models.TextField()
+    description = SummernoteTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -51,9 +55,9 @@ class BackgroundImage(models.Model):
 class Issue(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.PROTECT)
     title = models.CharField(max_length=20, null=True)
-    presentation = models.TextField(blank=True)
+    presentation = SummernoteTextField(blank=True)
     cover = models.ImageField(upload_to="issue/", blank=True)
-    document = models.FileField(
+    file = models.FileField(
         upload_to="issue/",
         blank=True,
         validators=[FileExtensionValidator(allowed_extensions=["pdf", "PDF"])],
@@ -68,6 +72,33 @@ class Issue(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.file and self.file.name.lower().endswith(".pdf"):
+            self.generate_cover()
+
+    def generate_cover(self):
+        doc = pymupdf.open(self.file.path)
+        page = doc[0]
+        pix = page.get_pixmap(dpi=72)
+
+        cover_filename = os.path.basename(self.file.name) + ".png"
+
+        if callable(self.cover.field.upload_to):
+            upload_path = self.cover.field.upload_to(self, self.cover.name)
+        else:
+            upload_path = self.cover.field.upload_to
+
+        full_path = os.path.join(settings.MEDIA_ROOT, upload_path)
+        cover_path = os.path.join(full_path, cover_filename)
+
+        pix.save(cover_path)
+
+        self.cover.name = f"{upload_path}/{cover_filename}"
+
+        super().save(update_fields=["cover"])
 
 
 class Page(models.Model):
@@ -97,7 +128,7 @@ class Text(models.Model):
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.CharField(max_length=100, blank=True)
     order = models.IntegerField()
-    text = models.TextField()
+    text = SummernoteTextField()
     is_published = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -113,7 +144,6 @@ class Document(models.Model):
     class DocumentType(models.TextChoices):
         RULE = "RULE", "Rule"
         TEMPLATE = "TEMPLATE", "Template"
-        ISSUE = "ISSUE", "Issue"
         INFORMATION = "INFORMATION", "Information"
         OTHER = "OTHER", "Other"
 
@@ -127,3 +157,14 @@ class Document(models.Model):
 
     class Meta:
         ordering = ["title"]
+
+    def __str__(self):
+        return self.title
+
+
+class PageAllowedDocumentType(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.PROTECT)
+    document_type = models.CharField(max_length=11, choices=Document.DocumentType)
+
+    def __str__(self):
+        return self.document_type

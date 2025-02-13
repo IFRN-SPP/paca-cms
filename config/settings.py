@@ -136,6 +136,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -180,7 +187,7 @@ AUTH_USER_MODEL = "website.User"
 LOGIN_REDIRECT_URL = "/"
 
 SOCIALACCOUNT_ADAPTER = "suap_oauth.adapter.SuapAdapter"
-SOCIALACCOUNT_ONLY = True
+SOCIALACCOUNT_ONLY = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 SOCIALACCOUNT_PROVIDERS = {

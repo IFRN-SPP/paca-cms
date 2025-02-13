@@ -1,0 +1,15 @@
+{% extends "base_page.html" %}
+{% block page_content %}
+<div class="list-group">
+  {% for document in content %}
+  <div class="list-group-item bg-dark mb-2">
+    <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ document.file.url }}" target="_blank">
+      <span class=" me-2"><i class="fas fa-download"></i></span>
+      {{ document.title }} - Atualizado em: {{ document.updated_at }}
+    </a>
+  </div>
+  {%empty%}
+  <h1>EM BREVE</h1>
+  {% endfor %}
+</div> 
+{% endblock %}

@@ -7,9 +7,16 @@
 <header id="site-header" class="site-header valign-center" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
   <div class="intro" >
     <h1>{{ publication.title }}</h1>
-    <h4>ISSN: {{ publication.issn }} - DOI: {{ publication.doi }}</h4>
+    {% if publication.issn %}
+    <h4>ISSN: {{ publication.issn }}
+    {% if publication.doi %}
+     - DOI: {{ publication.doi }}</h4>
+    {% endif %}
+    {% endif %}
     <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
+    {% if publication.issue_set.last %}
     <a class="btn btn-success text-light" data-scroll href="{% url 'issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
+    {% endif %}
   </div>
 </header>
 

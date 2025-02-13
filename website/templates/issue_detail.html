@@ -13,19 +13,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       {{ issue.presentation | safe }}
-      <p>Data de publicação: {{ issue.pub_date }}</p>
-      <div class="list-group">
+      <p><strong>Data de publicação</strong>: {{ issue.pub_date }}</p>
+    </div>
+    <div class="col-md-4 p-3">
+      <div>
+        <a href="{{ issue.file.url }}">
+          <img class="img-fluid border border-3 w-75 d-block mx-auto" src="{{ issue.cover.url }}" alt="Capa">
+        </a>
+      </div>
+      <div class="list-group py-4">
         <div class="list-group-item bg-dark mb-2">
-            <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ issue.document.url}}" target="_blank">
-              <span class=" me-2"><i class="fas fa-download"></i></span>
-              Download
-            </a>
+          <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ issue.file.url}}" target="_blank">
+            <span class=" me-2"><i class="fas fa-download"></i></span>
+            Download
+          </a>
         </div>
       </div> 
+    </div>
   </div>
 </div>
-   
 </section>
 {% endblock content %}

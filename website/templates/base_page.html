@@ -1,0 +1,23 @@
+{% extends 'public/base.html' %}
+{% load static i18n %}
+{% block title %} {{ page.title }} {% endblock title %}
+{% block bodyclass %}bg-black single-page{% endblock bodyclass %}
+
+{% block content %}
+<section class="section about bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="section-title">{{ page.title }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {% block page_content %}
+          <h1>EM BREVE</h1>  
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
