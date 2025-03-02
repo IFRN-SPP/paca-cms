@@ -40,7 +40,7 @@ python manage.py migrate
 
 - Carregue a *fixture* inicial (inicializa o banco com um evento de exemplo e administrador padrão):
 ```bash
-python manage loaddata website/fixture/initial.json
+python manage loaddata app/fixture/initial.json
 ```
 
 - Execute o servidor e acesse o sistema;
