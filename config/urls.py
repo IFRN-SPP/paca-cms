@@ -23,7 +23,7 @@ from website import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("pages/<slug:slug>/", views.pages, name="pages"),
+    path("p/<slug:slug>/", views.pages, name="pages"),
     path("issues/<int:id>/", views.issue_detail, name="issue_detail"),
     path("accounts/", include("allauth.urls")),
     path("admin/", admin.site.urls),

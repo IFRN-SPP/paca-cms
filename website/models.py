@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.conf import settings
 from django_summernote.fields import SummernoteTextField
+from autoslug import AutoSlugField
 import os
 import pymupdf
 
@@ -112,7 +113,7 @@ class Page(models.Model):
     title = models.CharField(max_length=20)
     order = models.IntegerField()
     page_type = models.CharField(max_length=2, choices=PageType)
-    slug = models.SlugField(default="", null=False)
+    slug = AutoSlugField(populate_from="title", unique=True, default="", null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -141,7 +142,7 @@ class Text(models.Model):
 
 
 class Document(models.Model):
-    class DocumentType(models.TextChoices):
+    class Category(models.TextChoices):
         RULE = "RULE", "Rule"
         TEMPLATE = "TEMPLATE", "Template"
         INFORMATION = "INFORMATION", "Information"
@@ -149,7 +150,7 @@ class Document(models.Model):
 
     publication = models.ForeignKey(Publication, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
-    document_type = models.CharField(max_length=11, choices=DocumentType)
+    category = models.CharField(max_length=11, choices=Category)
     file = models.FileField(upload_to="documents/")
     is_published = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -162,9 +163,9 @@ class Document(models.Model):
         return self.title
 
 
-class PageAllowedDocumentType(models.Model):
+class PageAllowedDocumentCategory(models.Model):
     page = models.ForeignKey(Page, on_delete=models.PROTECT)
-    document_type = models.CharField(max_length=11, choices=Document.DocumentType)
+    category = models.CharField(max_length=11, choices=Document.Category)
 
     def __str__(self):
-        return self.document_type
+        return self.category

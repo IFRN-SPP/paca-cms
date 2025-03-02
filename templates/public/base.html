@@ -63,11 +63,9 @@
       <!-- logo -->
       <div class="navbar-brand">
         <a class="portal-logo" href="{% url 'index' %}">
-          {%if publication.logo %}
-          <img src="{{ publication.logo.url }}" alt="Logo">
-          {% else %}
-          <img src="https://placehold.co/100x60/png?text=Logo" alt="Logo">
-          {% endif %}
+          {% with default_logo_url="static('img/placeholder/logo.png')"  %}
+          <img src="{{ publication.logo.url|default:default_logo_url }}" alt="Logo">
+          {% endwith %}
         </a>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false" aria-label="Toggle navigation">

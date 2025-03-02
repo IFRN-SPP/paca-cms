@@ -10,7 +10,12 @@ def pages(request, slug):
     page = get_object_or_404(Page, slug=slug)
     if page.page_type == Page.PageType.DOWNLOADS:
         template = "download_page.html"
-        content = Document.objects.all()
+        allowed_categories = page.pagealloweddocumentcategory_set.all().values_list(
+            "category", flat=True
+        )
+        content = Document.objects.filter(category__in=allowed_categories).order_by(
+            "title"
+        )
     elif page.page_type == Page.PageType.ISSUES:
         template = "issues_page.html"
         content = Issue.objects.all()

@@ -9,7 +9,7 @@ from .models import (
     Document,
     SocialMedia,
     BackgroundImage,
-    PageAllowedDocumentType,
+    PageAllowedDocumentCategory,
 )
 from django.contrib.auth.admin import UserAdmin
 
@@ -29,14 +29,14 @@ class BackgroundImageInline(admin.StackedInline):
     extra = 0
 
 
-class PageAllowedDocumentTypeInline(admin.StackedInline):
-    model = PageAllowedDocumentType
+class PageAllowedDocumentCategoryInline(admin.StackedInline):
+    model = PageAllowedDocumentCategory
     extra = 0
 
 
 class PageAdmin(SummernoteModelAdmin):
     summernote_fields = "__all__"
-    inlines = [TextInline, PageAllowedDocumentTypeInline]
+    inlines = [TextInline, PageAllowedDocumentCategoryInline]
 
 
 class PublicationAdmin(SummernoteModelAdmin):
