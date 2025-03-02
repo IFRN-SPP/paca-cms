@@ -55,7 +55,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "website",
+    "app",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -85,7 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "website.context_processors.publication_data",
+                "app.context_processors.publication_data",
             ],
         },
     },
@@ -183,7 +183,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # config users
-AUTH_USER_MODEL = "website.User"
+AUTH_USER_MODEL = "app.User"
 LOGIN_REDIRECT_URL = "/"
 
 SOCIALACCOUNT_ADAPTER = "suap_oauth.adapter.SuapAdapter"
