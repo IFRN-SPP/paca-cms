@@ -13,8 +13,8 @@
      - DOI: {{ publication.doi }}</h4>
     {% endif %}
     {% endif %}
-    <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
     {% if publication.issue_set.last %}
+    <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
     <a class="btn btn-success text-light" data-scroll href="{% url 'issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
     {% endif %}
   </div>

@@ -63,9 +63,11 @@
       <!-- logo -->
       <div class="navbar-brand">
         <a class="portal-logo" href="{% url 'index' %}">
-          {% with default_logo_url="static('img/placeholder/logo.png')"  %}
-          <img src="{{ publication.logo.url|default:default_logo_url }}" alt="Logo">
-          {% endwith %}
+          {% if publication.logo %}
+          <img src="{{ publication.logo.url }}" alt="Logo">
+          {% else %}
+          {{ publication.short_title }}
+          {% endif %}
         </a>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +92,11 @@
   {% block content %}
   {% endblock content %}
 
-  <section id="facts" class="section facts bg-image text-center text-light fs-1" style="background: url('{{ publication.backgroundimage_set.all.1 }}') no-repeat center; background-size: cover;">
+  {% if publication.backgroundimage_set.all.1 %}
+  <section id="facts" class="section facts bg-image text-center text-light fs-1" style="background: url('{{ publication.backgroundimage_set.all.1 }}') no-repeat center; background-size: cover;" >
+  {% else %}
+  <section id="facts" class="section facts bg-dark text-center text-light fs-1">
+  {% endif %}
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
@@ -117,7 +123,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          {% if publication.issn %}
           <p class="site-info text-muted">{{ publication.title }}<br> <small>ISSN: {{ publication.issn }}</small></p>
+          {% endif %}
           <ul class="social-block">
             {% for social in publication.socialmedia_set.all %}
             <li><a href="{{ social.url }}" target="_blank"><i class="{{ social.icon }}"></i></a></li>
