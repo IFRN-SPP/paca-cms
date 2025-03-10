@@ -18,7 +18,7 @@ A página principal da publicação, além de apresentar o título em destaque, 
 
 ### Referências
 
-- https://cbissn.ibict.br/index.php/solicitar-issn/publicacao-eletronica/online
+- https://cbissn.ibict.br/formulario/ 
 - https://doity.com.br/blog/como-solicitar-o-issn/
 
 ## Instalação
