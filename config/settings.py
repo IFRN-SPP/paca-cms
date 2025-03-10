@@ -47,10 +47,10 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "django_summernote",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "django_summernote",
     "auditlog",
 ]
 

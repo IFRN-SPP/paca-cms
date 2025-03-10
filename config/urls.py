@@ -22,9 +22,13 @@ from django.conf.urls.static import static
 from app import views
 
 urlpatterns = [
+    # Public
     path("", views.index, name="index"),
     path("p/<slug:slug>/", views.pages, name="pages"),
     path("issues/<int:id>/", views.issue_detail, name="issue_detail"),
+    # Private
+    path("admin/", views.dashboard, name="dashboard"),
+    # Third party
     path("accounts/", include("allauth.urls")),
     path("summernote/", include("django_summernote.urls")),
 ]
