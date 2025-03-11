@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin, SummernoteModelAdminMixin
 from .models import (
-    User,
     Publication,
     Issue,
     Page,
@@ -11,9 +10,7 @@ from .models import (
     BackgroundImage,
     PageAllowedDocumentCategory,
 )
-from django.contrib.auth.admin import UserAdmin
 
-admin.site.register(User, UserAdmin)
 admin.site.register(Document)
 admin.site.register(SocialMedia)
 
