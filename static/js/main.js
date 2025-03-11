@@ -1,18 +1,10 @@
-$(window).scroll(function(){
-	handleTopNavAnimation();
+"use strict";
+
+document.addEventListener("scroll", () => {
+  const navbar = document.querySelector("#site-nav");
+  if(window.scrollY > 50) {
+    navbar.classList.add("navbar-solid"); 
+  } else {
+    navbar.classList.remove("navbar-solid"); 
+  }
 });
-
-$(window).on('load', function(){
-	handleTopNavAnimation();
-});
-
-function handleTopNavAnimation() {
-	var top=$(window).scrollTop();
-
-	if(top>10){
-		$('#site-nav').addClass('navbar-solid'); 
-	}
-	else{
-		$('#site-nav').removeClass('navbar-solid'); 
-	}
-}

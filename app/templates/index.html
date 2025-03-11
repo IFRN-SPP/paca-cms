@@ -2,9 +2,8 @@
 {% load static i18n custom_tags %}
 {% block title %} Início {% endblock title %}
 
-{% block content %}
-  
-<header id="site-header" class="site-header valign-center" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
+{% block page_header %}
+<header id="site-header" class="site-header" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
   <div class="intro" >
     <h1>{{ publication.title }}</h1>
     {% if publication.issn %}
@@ -15,12 +14,15 @@
     {% endif %}
     {% if publication.issue_set.last %}
     <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
-    <a class="btn btn-success text-light" data-scroll href="{% url 'issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
+    <a class="btn btn-success text-light" href="{% url 'issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
     {% endif %}
   </div>
 </header>
+{% endblock %}
 
-<section id="about" class="section about">
+
+{% block content %}
+<section class="section about">
   <div class="container">
     <div class="row">
       <h3 class="section-title text-center">Apresentação</h3>
