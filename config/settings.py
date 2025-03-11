@@ -55,6 +55,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    "suap_oauth",
+    "users",
     "app",
 ]
 
@@ -183,7 +185,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # config users
-AUTH_USER_MODEL = "app.User"
+AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
 
 SOCIALACCOUNT_ADAPTER = "suap_oauth.adapter.SuapAdapter"

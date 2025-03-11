@@ -1,15 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.conf import settings
 from django_summernote.fields import SummernoteTextField
 from autoslug import AutoSlugField
 import os
 import pymupdf
-
-
-class User(AbstractUser):
-    pass
 
 
 class Publication(models.Model):
