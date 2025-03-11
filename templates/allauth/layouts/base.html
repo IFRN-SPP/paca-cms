@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}
+  {% block head_title %}
+  {% endblock %}
+{% endblock %}
+
+{% block body_class %}login-page bg-body-secondary app-loaded{% endblock %}
+
+{% block app_wrapper %}
+<div class="login-box">
+  <div class="login-logo">
+    <a href="{% url 'dashboard' %}"><strong>Paca</strong>CMS</a>
+  </div>
+  <div class="card">
+    <div class="card-body login-card-body">
+      {% block content %}
+      {% endblock %}
+    </div>
+    {% block extra_body %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
