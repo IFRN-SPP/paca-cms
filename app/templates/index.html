@@ -2,6 +2,8 @@
 {% load static i18n custom_tags %}
 {% block title %} Início {% endblock title %}
 
+{% block bodyclass %}index{% endblock %}
+
 {% block page_header %}
 <header id="site-header" class="site-header" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
   <div class="intro" >
@@ -22,7 +24,7 @@
 
 
 {% block content %}
-<section class="section about">
+<section class="section">
   <div class="container">
     <div class="row">
       <h3 class="section-title text-center">Apresentação</h3>

@@ -1,10 +1,9 @@
-{% extends 'public/base.html' %}
+{% extends "base_page.html" %}
 {% load static %}
-{% block title %}Edição {{ issue.title }}{% endblock title %}
-{% block bodyclass %}bg-black single-page{% endblock bodyclass %}
 
-{% block content %}
-<section class="section about bg-white">
+{% block title %}Edição {{ issue.title }}{% endblock title %}
+
+{% block page_content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -30,7 +29,7 @@
         {% endif %}
       </div>
       <div class="list-group py-4">
-        <div class="list-group-item bg-dark mb-2">
+        <div class="list-group-item mb-2">
           {% if issue.file %}
           <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ issue.file.url}}" target="_blank">
           {% else %}
@@ -44,5 +43,4 @@
     </div>
   </div>
 </div>
-</section>
-{% endblock content %}
+{% endblock %}

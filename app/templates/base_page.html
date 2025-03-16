@@ -1,24 +1,21 @@
 {% extends 'public/base.html' %}
 {% load static i18n %}
 {% block title %} {{ page.title }} {% endblock title %}
-
-{% block bodyclass %}single-page{% endblock bodyclass %}
+{% block bodyclass %} single-page {% endblock %}
 
 {% block page_header %}
-<header class="container pt-4">
+<header class="container py-4">
   <h2 class="section-title">{{ page.title }}</h2>
 </header>
 {% endblock %}
 
 {% block content %}
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        {% block page_content %}
-          <h1>EM BREVE</h1>  
-        {% endblock %}
-      </div>
+<section class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% block page_content %}
+        <h1>EM BREVE</h1>  
+      {% endblock %}
     </div>
   </div>
 </section>

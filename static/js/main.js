@@ -1,10 +1,11 @@
 "use strict";
 
-document.addEventListener("scroll", () => {
-  const navbar = document.querySelector("#site-nav");
-  if(window.scrollY > 50) {
-    navbar.classList.add("navbar-solid"); 
-  } else {
-    navbar.classList.remove("navbar-solid"); 
-  }
-});
+if (document.body.classList.contains("index")) {
+  document.addEventListener("scroll", () => {
+    if(window.scrollY > 50) {
+      document.body.classList.remove("index"); 
+    } else {
+      document.body.classList.add("index"); 
+    }
+  });
+}
