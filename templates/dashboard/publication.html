@@ -1,0 +1,13 @@
+{% extends "dashboard/private_base.html" %}
+
+{% block crumb %}
+{{ block.super }}
+<li class="breadcrumb-item">
+  <a href="{% url 'dashboard:publication' %}">{{page_title}}</a>
+</li>
+{% endblock %}
+
+{% block app_content %}
+<h1>{{ object.title }}</h1>
+<a href="{% url 'dashboard:publication_update' %}" class="btn btn-primary" role="button">Atualizar</a>
+{% endblock %}

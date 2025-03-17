@@ -62,6 +62,7 @@ class Issue(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     pub_date = models.DateField()
     url = models.URLField()
+    is_published = models.BooleanField()
 
     class Meta:
         ordering = ["-pub_date"]
@@ -111,6 +112,7 @@ class Page(models.Model):
     slug = AutoSlugField(populate_from="title", unique=True, default="", null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField()
 
     class Meta:
         ordering = ["order"]

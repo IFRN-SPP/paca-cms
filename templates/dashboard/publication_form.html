@@ -1,0 +1,17 @@
+{% extends "dashboard/publication.html" %}
+
+{% block crumb %}
+{{ block.super }}
+<li class="breadcrumb-item">
+  <a href="{% url 'dashboard:publication_update' %}">{{page_title}}</a>
+</li>
+{% endblock %}
+
+{% block app_content %}
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  
+  <input type="submit" value="Atualizar">
+</form>
+{% endblock %}

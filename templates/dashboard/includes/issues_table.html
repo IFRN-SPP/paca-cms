@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width: 10px">#</th>
+      <th>Título</th>
+      <th>Criação</th>
+      <th>Alteração</th>
+      <th>Publicado?</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for issue in page_obj %}
+    <tr class="align-middle">
+      <td>{{ issue.id }}</td>
+      <td>{{ issue.title }}</td>
+      <td> {{ issue.created_at|date }} </td>
+      <td> {{ issue.updated_at|date }} </td>
+      <td>{{ issue.is_published | yesno:"Sim,Não," }}</td>
+      <td class="text-nowrap">
+        <a href="{% url 'dashboard:issues_detail' issue.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+        <a href="{% url 'dashboard:issues_update' issue.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
+        <a href="{% url 'dashboard:issues_delete' issue.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

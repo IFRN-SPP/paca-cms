@@ -1,6 +1,8 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 
+{% block title %}{{ page_title }}{% endblock %}
+
 {% block app_wrapper %}
 <div class="app-wrapper">
   <!--begin::Header-->
@@ -37,14 +39,14 @@
             <li><a class="dropdown-item" href="#">
               <i class="bi bi-person-fill me-2"></i>
                 Perfil</a></li>
-            <li><a class="dropdown-item" href="#">
+            <li><a class="dropdown-item" href="{% url 'account_email' %}">
               <i class="bi bi-envelope-at-fill me-2"></i>
                 Alterar Email</a></li>
-            <li><a class="dropdown-item" href="#">
+            <li><a class="dropdown-item" href="{% url 'account_change_password' %}">
               <i class="bi bi-key-fill me-2"></i>
                 Alterar Senha</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">
+            <li><a class="dropdown-item" href="{% url 'account_logout' %}">
               <i class="bi bi-power me-2"></i>Sair
             </a></li>
           </ul>
@@ -67,13 +69,12 @@
       <div class="container-fluid">
         <!--begin::Row-->
         <div class="row">
-          <div class="col-sm-6"><h3 class="mb-0">Layout</h3></div>
+          <div class="col-sm-6"><h3 class="mb-0">{% block page_title %}{{ page_title }}{% endblock %}</h3></div>
           <div class="col-sm-6">
             {% block breadcrumbs %}
             <ol class="breadcrumb float-sm-end">
               {% block crumb %}
-              <li class="breadcrumb-item"><a href="#">Docs</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Layout</li>
+              <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Administração</a></li>
               {% endblock %}
             </ol>
             {% endblock %}

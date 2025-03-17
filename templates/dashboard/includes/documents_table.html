@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width: 10px">#</th>
+      <th>Título</th>
+      <th>Criação</th>
+      <th>Alteração</th>
+      <th>Publicado?</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for document in page_obj %}
+    <tr class="align-middle">
+      <td>{{ document.id }}</td>
+      <td>{{ document.title }}</td>
+      <td> {{ document.created_at|date }} </td>
+      <td> {{ document.updated_at|date }} </td>
+      <td>{{ document.is_published | yesno:"Sim,Não," }}</td>
+      <td class="text-nowrap">
+        <a href="{% url 'dashboard:documents_detail' document.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+        <a href="{% url 'dashboard:documents_update' document.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
+        <a href="{% url 'dashboard:documents_delete' document.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

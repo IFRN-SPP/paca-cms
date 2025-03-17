@@ -36,7 +36,3 @@ def pages(request, slug):
 def issue_detail(request, id):
     issue = get_object_or_404(Issue, id=id)
     return render(request, "issue_detail.html", {"issue": issue})
-
-
-def dashboard(request):
-    return render(request, "dashboard/index.html")
