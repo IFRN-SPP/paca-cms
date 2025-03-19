@@ -12,8 +12,17 @@
 {% endblock %}
 
 {% block app_content %}
+{% if "add" in allowed_actions %}
+<div class="pb-4 d-flex">
+  <a class="ms-auto me-2" href="{% url allowed_actions.add %}">
+    <button class="btn btn-primary">Novo</button>
+  </a>
+</div>
+{% endif %}
 
-{% include table_template %}
+<div class="table-responsive">
+  {% include table_template %}
+</div>
 
 {% if paginator.num_pages > 1 %}
 <ul class="pagination justify-content-center">

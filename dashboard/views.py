@@ -18,19 +18,24 @@ class DashboardListView(
     actions = ["add", "change", "delete", "view"]
 
     def get_allowed_actions(self):
-        allowed_actions = []
+        allowed_actions = {}
         app_label = self.model._meta.app_label
         model_name = self.model._meta.model_name
         for action in self.actions:
             perm_string = f"{app_label}.{action}_{model_name}"
             if self.request.user.has_perm(perm_string):
-                allowed_actions.append(perm_string)
+                allowed_actions[action] = (
+                    self.request.resolver_match.view_name + "_" + action
+                )
+        print(allowed_actions)
+        return allowed_actions
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.request.user)
+        print(self.request.resolver_match.view_name)
         context["table_template"] = self.table_template
-        self.get_allowed_actions()
+        context["allowed_actions"] = self.get_allowed_actions()
+        print(context)
         return context
 
 
@@ -78,6 +83,10 @@ class IssueListView(DashboardListView):
     table_template = "dashboard/includes/issues_table.html"
 
 
+class IssueCreateView(DashboardListView):
+    pass
+
+
 class IssueDetailView(DashboardDetailView):
     page_title = "Edições"
     model = Issue
@@ -103,6 +112,10 @@ class PageListView(DashboardListView):
     table_template = "dashboard/includes/pages_table.html"
 
 
+class PageCreateView(DashboardDetailView):
+    pass
+
+
 class PageDetailView(DashboardDetailView):
     pass
 
@@ -122,6 +135,10 @@ class DocumentListView(DashboardListView):
     table_template = "dashboard/includes/documents_table.html"
 
 
+class DocumentCreateView(DashboardListView):
+    pass
+
+
 class DocumentDetailView(DashboardDetailView):
     pass
 
@@ -139,6 +156,10 @@ class UserListView(DashboardListView):
     paginate_by = 10
     model = User
     table_template = "dashboard/includes/users_table.html"
+
+
+class UserCreateView(DashboardDetailView):
+    pass
 
 
 class UserDetailView(DashboardDetailView):

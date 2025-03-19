@@ -13,11 +13,7 @@
       <td>{{ tuser.id }}</td>
       <td>{{ tuser.username }}</td>
       <td>{{ tuser.email }}</td>
-      <td class="text-nowrap">
-        <a href="{% url 'dashboard:users_detail' tuser.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-        <a href="{% url 'dashboard:users_update' tuser.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
-        <a href="{% url 'dashboard:users_delete' tuser.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-      </td>
+      {% include "dashboard/includes/actions.html" with obj=tuser %}
     </tr>
     {% endfor %}
   </tbody>

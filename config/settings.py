@@ -186,7 +186,7 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # config users
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "dashboard:index"
 
 SOCIALACCOUNT_ADAPTER = "suap_oauth.adapter.SuapAdapter"
 SOCIALACCOUNT_ONLY = False

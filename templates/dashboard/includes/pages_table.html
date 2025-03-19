@@ -3,6 +3,7 @@
     <tr>
       <th style="width: 10px">#</th>
       <th>Título</th>
+      <th>Ordem</th>
       <th>Criação</th>
       <th>Alteração</th>
       <th>Publicado?</th>
@@ -14,20 +15,11 @@
     <tr class="align-middle">
       <td>{{ page.id }}</td>
       <td>{{ page.title }}</td>
+      <td>{{ page.order }}</td>
       <td>{{ page.created_at|date }}</td>
       <td>{{ page.updated_at|date }}</td>
       <td>{{ page.is_published | yesno:"Sim,Não," }}</td>
-      <td class="text-nowrap">
-        {% if perms.app.view_page %}
-        <a href="{% url 'dashboard:pages_detail' page.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-        {% endif %}
-        {% if perms.app.change_page %}
-        <a href="{% url 'dashboard:pages_update' page.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
-        {% endif %}
-        {% if perms.app.delete_page %}
-        <a href="{% url 'dashboard:pages_delete' page.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-        {% endif %}
-      </td>
+      {% include "dashboard/includes/actions.html" with obj=page %}
     </tr>
     {% endfor %}
   </tbody>
