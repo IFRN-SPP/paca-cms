@@ -34,6 +34,7 @@
             </p>
           </a>
         </li>
+        {% if perms.dashboard.view_publication %}
         <li class="nav-item">
           <a href="{% url 'dashboard:publication' %}" class="nav-link">
             <i class="nav-icon bi bi-journals"></i>
@@ -42,6 +43,8 @@
             </p>
           </a>
         </li>
+        {% endif %}
+        {% if perms.dashboard.view_issue %}
         <li class="nav-item">
           <a href="{% url 'dashboard:issues' %}" class="nav-link">
             <i class="nav-icon bi bi-files"></i>
@@ -50,24 +53,31 @@
             </p>
           </a>
         </li>
+        {% endif %}
+        {% if perms.dashboard.view_page %}
         <li class="nav-item">
           <a href="{% url 'dashboard:pages' %}" class="nav-link">
             <i class="nav-icon bi bi-hand-index-thumb"></i>
             <p>Páginas</p>
           </a>
         </li>
+        {% endif %}
+        {% if perms.dashboard.view_document %}
         <li class="nav-item">
           <a href="{% url 'dashboard:documents' %}" class="nav-link">
             <i class="nav-icon bi bi-file-earmark-arrow-up-fill"></i>
             <p>Documentos</p>
           </a>
         </li>
+        {% endif %}
+        {% if perms.dashboard.view_user %}
         <li class="nav-item">
           <a href="{% url 'dashboard:users' %}" class="nav-link">
             <i class="nav-icon bi bi-people-fill"></i>
             <p>Usuários</p>
           </a>
         </li>
+        {% endif %}
       </ul>
       <!--end::Sidebar Menu-->
     </nav>

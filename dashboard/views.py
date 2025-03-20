@@ -2,22 +2,21 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic.edit import UpdateView, DeleteView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from app.models import Publication, Issue, Page, Document
 from users.models import User
-from .mixins import PageTitleMixin, AllowedActionsMixin
+from .mixins import PageTitleMixin, AllowedActionsMixin, AutoPermissionRequiredMixin
 
 
 class DashboardListView(
-    LoginRequiredMixin,
-    PermissionRequiredMixin,
+    AutoPermissionRequiredMixin,
     AllowedActionsMixin,
     PageTitleMixin,
     ListView,
 ):
     template_name = "dashboard/list.html"
-    permission_required = ""
+    permission_action = "view"
     table_template = ""
 
     def get_context_data(self, **kwargs):
@@ -26,16 +25,48 @@ class DashboardListView(
         return context
 
 
-class DashboardDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
-    pass
+class DashboardDetailView(
+    AutoPermissionRequiredMixin,
+    AllowedActionsMixin,
+    PageTitleMixin,
+    DetailView,
+):
+    template_name = "dashboard/detail.html"
+    permission_action = "view"
 
 
-class DashboardUpdateView(LoginRequiredMixin, PageTitleMixin, UpdateView):
-    pass
+class DashboardCreateView(
+    AutoPermissionRequiredMixin,
+    AllowedActionsMixin,
+    PageTitleMixin,
+    CreateView,
+):
+    template_name = "dashboard/create.html"
+    permission_action = "create"
 
 
-class DashboardDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
-    pass
+class DashboardUpdateView(
+    AutoPermissionRequiredMixin,
+    AllowedActionsMixin,
+    PageTitleMixin,
+    UpdateView,
+):
+    template_name = "dashboard/update.html"
+    permission_action = "change"
+
+
+class DashboardDeleteView(
+    AutoPermissionRequiredMixin,
+    AllowedActionsMixin,
+    PageTitleMixin,
+    DeleteView,
+):
+    page_title = "Remover"
+    template_name = "dashboard/delete.html"
+    permission_action = "delete"
+
+    def get_success_url(self):
+        return reverse_lazy(self.request.resolver_match.view_name.rsplit("_", 1)[0])
 
 
 class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
@@ -70,8 +101,10 @@ class IssueListView(DashboardListView):
     table_template = "dashboard/includes/issues_table.html"
 
 
-class IssueCreateView(DashboardListView):
-    pass
+class IssueCreateView(DashboardCreateView):
+    page_title = "Edições"
+    model = Issue
+    template_name = "dashboard/issues_create.html"
 
 
 class IssueDetailView(DashboardDetailView):
@@ -80,16 +113,14 @@ class IssueDetailView(DashboardDetailView):
     template_name = "dashboard/issues_detail.html"
 
 
-class IssueUpdateView(DashboardListView):
+class IssueUpdateView(DashboardUpdateView):
     page_title = "Edições"
     model = Issue
-    template_name = "dashboard/issues.html"
+    template_name = "dashboard/issues_update.html"
 
 
-class IssueDeleteView(DashboardListView):
-    page_title = "Edições"
+class IssueDeleteView(DashboardDeleteView):
     model = Issue
-    template_name = "dashboard/issues.html"
 
 
 class PageListView(DashboardListView):
@@ -99,20 +130,26 @@ class PageListView(DashboardListView):
     table_template = "dashboard/includes/pages_table.html"
 
 
-class PageCreateView(DashboardDetailView):
-    pass
+class PageCreateView(DashboardCreateView):
+    model = Page
+    page_title = "Páginas"
+    template_name = "dashboard/pages_create.html"
 
 
 class PageDetailView(DashboardDetailView):
-    pass
+    model = Page
+    page_title = "Páginas"
+    template_name = "dashboard/pages_detail.html"
 
 
 class PageUpdateView(DashboardUpdateView):
-    pass
+    model = Page
+    page_title = "Páginas"
+    template_name = "dashboard/pages_update.html"
 
 
 class PageDeleteView(DashboardDeleteView):
-    pass
+    model = Page
 
 
 class DocumentListView(DashboardListView):
@@ -122,20 +159,26 @@ class DocumentListView(DashboardListView):
     table_template = "dashboard/includes/documents_table.html"
 
 
-class DocumentCreateView(DashboardListView):
-    pass
+class DocumentCreateView(DashboardCreateView):
+    page_title = "Documentos"
+    model = Document
+    table_template = "dashboard/documents_create.html"
 
 
 class DocumentDetailView(DashboardDetailView):
-    pass
+    page_title = "Documentos"
+    model = Document
+    table_template = "dashboard/documents_detail.html"
 
 
 class DocumentUpdateView(DashboardUpdateView):
-    pass
+    page_title = "Documentos"
+    model = Document
+    table_template = "dashboard/documents_update.html"
 
 
 class DocumentDeleteView(DashboardDeleteView):
-    pass
+    model = Document
 
 
 class UserListView(DashboardListView):
@@ -145,17 +188,23 @@ class UserListView(DashboardListView):
     table_template = "dashboard/includes/users_table.html"
 
 
-class UserCreateView(DashboardDetailView):
-    pass
+class UserCreateView(DashboardCreateView):
+    page_title = "Usuários"
+    model = User
+    table_template = "dashboard/users_create.html"
 
 
 class UserDetailView(DashboardDetailView):
-    pass
+    page_title = "Usuários"
+    model = User
+    table_template = "dashboard/users_detail.html"
 
 
 class UserUpdateView(DashboardUpdateView):
-    pass
+    page_title = "Usuários"
+    model = User
+    table_template = "dashboard/users_update.html"
 
 
 class UserDeleteView(DashboardDeleteView):
-    pass
+    model = User
