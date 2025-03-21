@@ -33,6 +33,30 @@ class DashboardDetailView(
 ):
     template_name = "dashboard/detail.html"
     permission_action = "view"
+    page_title = "Detalhar"
+    fields = "__all__"
+    safe_fields = ["description", "presentation"]
+
+    def get_fields(self):
+        selected_fields = []
+        no_check = not isinstance(self.fields, (list, tuple))
+        for field in self.object._meta.fields:
+            if no_check or field.name in self.fields:
+                selected_fields.append(
+                    {
+                        "label": field.verbose_name,
+                        "value": getattr(self.object, field.name),
+                        "safe": True
+                        if field.verbose_name in self.safe_fields
+                        else False,
+                    }
+                )
+        return selected_fields
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["fields"] = self.get_fields()
+        return context
 
 
 class DashboardCreateView(
@@ -73,10 +97,19 @@ class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     template_name = "dashboard/index.html"
     page_title = "Dashboard"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["issues"] = Issue.objects.filter(is_published=True).count()
+        context["pages"] = Page.objects.filter(is_published=True).count()
+        context["documents"] = Document.objects.filter(is_published=True).count()
+        context["users"] = User.objects.count()
+        return context
+
 
 class PublicationDetailView(DashboardDetailView):
     page_title = "Publicação"
     model = Publication
+    fields = ["organization", "description"]
     template_name = "dashboard/publication.html"
 
     def get_object(self, queryset=None):
@@ -104,19 +137,20 @@ class IssueListView(DashboardListView):
 class IssueCreateView(DashboardCreateView):
     page_title = "Edições"
     model = Issue
-    template_name = "dashboard/issues_create.html"
+    fields = "__all__"
+    success_url = reverse_lazy("dashboard:issue_list")
 
 
 class IssueDetailView(DashboardDetailView):
     page_title = "Edições"
     model = Issue
-    template_name = "dashboard/issues_detail.html"
 
 
 class IssueUpdateView(DashboardUpdateView):
     page_title = "Edições"
     model = Issue
-    template_name = "dashboard/issues_update.html"
+    fields = "__all__"
+    success_url = reverse_lazy("dashboard:issue_list")
 
 
 class IssueDeleteView(DashboardDeleteView):
@@ -133,19 +167,20 @@ class PageListView(DashboardListView):
 class PageCreateView(DashboardCreateView):
     model = Page
     page_title = "Páginas"
-    template_name = "dashboard/pages_create.html"
+    fields = "__all__"
+    success_url = reverse_lazy("dashboard:page_list")
 
 
 class PageDetailView(DashboardDetailView):
     model = Page
     page_title = "Páginas"
-    template_name = "dashboard/pages_detail.html"
 
 
 class PageUpdateView(DashboardUpdateView):
     model = Page
     page_title = "Páginas"
-    template_name = "dashboard/pages_update.html"
+    fields = "__all__"
+    success_url = reverse_lazy("dashboard:page_list")
 
 
 class PageDeleteView(DashboardDeleteView):
@@ -162,19 +197,19 @@ class DocumentListView(DashboardListView):
 class DocumentCreateView(DashboardCreateView):
     page_title = "Documentos"
     model = Document
-    table_template = "dashboard/documents_create.html"
+    fields = "__all__"
 
 
 class DocumentDetailView(DashboardDetailView):
     page_title = "Documentos"
     model = Document
-    table_template = "dashboard/documents_detail.html"
 
 
 class DocumentUpdateView(DashboardUpdateView):
     page_title = "Documentos"
     model = Document
-    table_template = "dashboard/documents_update.html"
+    fields = "__all__"
+    success_url = "dashboard:document_list"
 
 
 class DocumentDeleteView(DashboardDeleteView):
@@ -197,13 +232,13 @@ class UserCreateView(DashboardCreateView):
 class UserDetailView(DashboardDetailView):
     page_title = "Usuários"
     model = User
-    table_template = "dashboard/users_detail.html"
 
 
 class UserUpdateView(DashboardUpdateView):
     page_title = "Usuários"
     model = User
-    table_template = "dashboard/users_update.html"
+    fields = "__all__"
+    success_url = "dashboard:user_list"
 
 
 class UserDeleteView(DashboardDeleteView):

@@ -1,9 +1,9 @@
-{% extends "dashboard/publication.html" %}
+{% extends "dashboard/private_base.html" %}
 
 {% block crumb %}
 {{ block.super }}
 <li class="breadcrumb-item">
-  <a href="{% url 'dashboard:publication_update' %}">{{page_title}}</a>
+  <a href="{% url 'dashboard:publication_change' %}">{{page_title}}</a>
 </li>
 {% endblock %}
 

@@ -15,7 +15,7 @@ class PageTitleMixin:
 
 
 class AllowedActionsMixin:
-    actions = ["add", "change", "delete", "view"]
+    actions = ["add", "change", "delete", "view", "list"]
 
     def get_allowed_actions(self):
         allowed_actions = {}
@@ -25,7 +25,7 @@ class AllowedActionsMixin:
             perm_string = f"{app_label}.{action}_{model_name}"
             if self.request.user.has_perm(perm_string):
                 allowed_actions[action] = (
-                    self.request.resolver_match.view_name + "_" + action
+                    f"{self.request.resolver_match.namespace}:{model_name}_{action}"
                 )
         return allowed_actions
 
