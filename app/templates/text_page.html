@@ -1,5 +1,3 @@
-{% extends "base_page.html" %}
-{% block page_content %}
 {% for text in content %}
   {% if text.is_published %}
     <h1 class="section-title">{{ text.title }}</h1>
@@ -9,4 +7,3 @@
 {%empty%}
   <h1>EM BREVE</h1>
 {% endfor %}
-{% endblock %}

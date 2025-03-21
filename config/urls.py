@@ -6,9 +6,9 @@ from app import views
 
 urlpatterns = [
     # Public
-    path("", views.index, name="index"),
-    path("p/<slug:slug>/", views.pages, name="pages"),
-    path("issues/<int:id>/", views.issue_detail, name="issue_detail"),
+    path("", views.IndexView.as_view(), name="index"),
+    path("p/<slug:slug>/", views.PagesDetailView.as_view(), name="pages"),
+    path("issues/<int:pk>/", views.IssuesDetailView.as_view(), name="issue_detail"),
     # Private
     path("admin/", include("dashboard.urls")),
     # Third party

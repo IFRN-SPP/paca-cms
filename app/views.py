@@ -1,38 +1,41 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from .models import Issue, Page, Document
 
 
-def index(request):
-    return render(request, "index.html")
+class IndexView(TemplateView):
+    template_name = "index.html"
 
 
-def pages(request, slug):
-    page = get_object_or_404(Page, slug=slug)
-    if page.page_type == Page.PageType.DOWNLOADS:
-        template = "download_page.html"
-        allowed_categories = page.pagealloweddocumentcategory_set.all().values_list(
-            "category", flat=True
-        )
-        content = Document.objects.filter(category__in=allowed_categories).order_by(
-            "title"
-        )
-    elif page.page_type == Page.PageType.ISSUES:
-        template = "issues_page.html"
-        content = Issue.objects.all()
-    else:
-        template = "text_page.html"
-        content = page.text_set.filter(is_published=True)
+class PagesDetailView(DetailView):
+    template_name = "page.html"
+    model = Page
+    context_object_name = "page"
 
-    return render(
-        request,
-        template,
-        {
-            "page": page,
-            "content": content,
-        },
-    )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page = context["page"]
+        if page.page_type == Page.PageType.DOWNLOADS:
+            inner_template = "download_page.html"
+            allowed_categories = page.pagealloweddocumentcategory_set.all().values_list(
+                "category", flat=True
+            )
+            content = Document.objects.filter(category__in=allowed_categories).order_by(
+                "title"
+            )
+        elif page.page_type == Page.PageType.ISSUES:
+            inner_template = "issues_page.html"
+            content = Issue.objects.filter(is_published=True)
+        else:
+            inner_template = "text_page.html"
+            content = page.text_set.filter(is_published=True)
+
+        context["inner_template"] = inner_template
+        context["content"] = content
+        return context
 
 
-def issue_detail(request, id):
-    issue = get_object_or_404(Issue, id=id)
-    return render(request, "issue_detail.html", {"issue": issue})
+class IssuesDetailView(DetailView):
+    template_name = "issue_detail.html"
+    model = Issue
+    context_object_name = "issue"

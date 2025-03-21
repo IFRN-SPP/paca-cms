@@ -71,7 +71,7 @@
             <li class="nav-item text-end text-md-center px-md-0 px-3">
               <a href="{% url 'index' %}" class="nav-link text-light">Início</a>
             </li>
-            {% for page in publication.page_set.all %}
+            {% for page in pages %}
             <li class="nav-item text-end text-md-center px-md-0 px-3">
               <a href="{% url 'pages' page.slug %}" class="nav-link text-light">{{ page.title }}</a>
             </li>
