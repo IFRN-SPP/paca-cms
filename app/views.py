@@ -1,13 +1,22 @@
+from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from .models import Issue, Page, Document
+
+
+class Unpublished404Mixin:
+    def get_object(self, **kwargs):
+        obj = super().get_object(**kwargs)
+        if not obj.is_published:
+            raise Http404()
+        return obj
 
 
 class IndexView(TemplateView):
     template_name = "index.html"
 
 
-class PagesDetailView(DetailView):
+class PagesDetailView(Unpublished404Mixin, DetailView):
     template_name = "page.html"
     model = Page
     context_object_name = "page"
@@ -35,7 +44,7 @@ class PagesDetailView(DetailView):
         return context
 
 
-class IssuesDetailView(DetailView):
+class IssuesDetailView(Unpublished404Mixin, DetailView):
     template_name = "issue_detail.html"
     model = Issue
     context_object_name = "issue"
