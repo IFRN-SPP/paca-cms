@@ -90,7 +90,9 @@ class DashboardDeleteView(
     permission_action = "delete"
 
     def get_success_url(self):
-        return reverse_lazy(self.request.resolver_match.view_name.rsplit("_", 1)[0])
+        model_name = self.model._meta.model_name
+        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
+        return reverse_lazy(success_url)
 
 
 class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
