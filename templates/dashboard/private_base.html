@@ -23,6 +23,7 @@
         <!--begin::User Menu Dropdown-->
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <span class="d-none d-md-inline me-2">{{ user | default:'Usuário' }}</span>
             <img
               {% if user.avatar %}
               src="{{ user.avatar.url }}"
@@ -32,8 +33,6 @@
               class="user-image rounded-circle shadow"
               alt="User Image"
             />
-              
-            <span class="d-none d-md-inline">{{ user.name | default:'Usuário' }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end w-75">
             <li><a class="dropdown-item" href="#">
