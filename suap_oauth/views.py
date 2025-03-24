@@ -13,14 +13,14 @@ class SuapOAuth2Adapter(OAuth2Adapter):
 
     if "SUAP_URL" in settings:
         web_url = settings.get("SUAP_URL").rstrip("/")
-        api_url = "{0}/api".format(web_url)
+        api_url = f"{web_url}/api"
     else:
         web_url = "https://suap.ifrn.edu.br"
         api_url = "https://suap.ifrn.edu.br/api"
 
-    access_token_url = "{0}/o/token/".format(web_url)
-    authorize_url = "{0}/o/authorize/".format(web_url)
-    profile_url = "{0}/eu/".format(api_url)
+    access_token_url = f"{web_url}/o/token/"
+    authorize_url = f"{web_url}/o/authorize/"
+    profile_url = f"{api_url}/rh/eu/"
 
     def complete_login(self, request, app, token, **kwargs):
         headers = {"Authorization": "Bearer {}".format(token.token)}
