@@ -34,7 +34,7 @@
             </p>
           </a>
         </li>
-        {% if perms.dashboard.view_publication %}
+        {% if perms.app.view_publication %}
         <li class="nav-item">
           <a href="{% url 'dashboard:publication_detail' %}" class="nav-link">
             <i class="nav-icon bi bi-journals"></i>
@@ -44,7 +44,7 @@
           </a>
         </li>
         {% endif %}
-        {% if perms.dashboard.view_issue %}
+        {% if perms.app.view_issue %}
         <li class="nav-item">
           <a href="{% url 'dashboard:issue_list' %}" class="nav-link">
             <i class="nav-icon bi bi-files"></i>
@@ -54,7 +54,7 @@
           </a>
         </li>
         {% endif %}
-        {% if perms.dashboard.view_page %}
+        {% if perms.app.view_page %}
         <li class="nav-item">
           <a href="{% url 'dashboard:page_list' %}" class="nav-link">
             <i class="nav-icon bi bi-hand-index-thumb"></i>
@@ -62,7 +62,7 @@
           </a>
         </li>
         {% endif %}
-        {% if perms.dashboard.view_document %}
+        {% if perms.app.view_document %}
         <li class="nav-item">
           <a href="{% url 'dashboard:document_list' %}" class="nav-link">
             <i class="nav-icon bi bi-file-earmark-arrow-up-fill"></i>
@@ -70,11 +70,19 @@
           </a>
         </li>
         {% endif %}
-        {% if perms.dashboard.view_user %}
+        {% if perms.users.view_user %}
         <li class="nav-item">
           <a href="{% url 'dashboard:user_list' %}" class="nav-link">
             <i class="nav-icon bi bi-people-fill"></i>
             <p>Usuários</p>
+          </a>
+        </li>
+        {% endif %}
+        {% if perms.auth.view_group %}
+        <li class="nav-item">
+          <a href="{% url 'dashboard:group_list' %}" class="nav-link">
+            <i class="nav-icon bi bi-people-fill"></i>
+            <p>Grupos</p>
           </a>
         </li>
         {% endif %}

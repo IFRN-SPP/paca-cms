@@ -4,6 +4,7 @@
       <th style="width: 10px">#</th>
       <th>Nome</th>
       <th>E-mail</th>
+      <th>Grupos</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -13,6 +14,13 @@
       <td>{{ tuser.id }}</td>
       <td>{{ tuser.username }}</td>
       <td>{{ tuser.email }}</td>
+      <td>
+        {% for group in tuser.groups.all  %}
+          {{ group }}{% if not forloop.last %}, {% endif %}    
+        {% empty %}
+        -
+        {% endfor %}
+      </td>
       {% include "dashboard/includes/actions.html" with obj=tuser %}
     </tr>
     {% endfor %}

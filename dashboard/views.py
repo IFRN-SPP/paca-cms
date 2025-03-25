@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from app.models import Publication, Issue, Page, Document
 from users.models import User
 from .mixins import PageTitleMixin, AllowedActionsMixin, AutoPermissionRequiredMixin
@@ -66,7 +67,12 @@ class DashboardCreateView(
     CreateView,
 ):
     template_name = "dashboard/create.html"
-    permission_action = "create"
+    permission_action = "add"
+
+    def get_success_url(self):
+        model_name = self.model._meta.model_name
+        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
+        return reverse_lazy(success_url)
 
 
 class DashboardUpdateView(
@@ -77,6 +83,11 @@ class DashboardUpdateView(
 ):
     template_name = "dashboard/update.html"
     permission_action = "change"
+
+    def get_success_url(self):
+        model_name = self.model._meta.model_name
+        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
+        return reverse_lazy(success_url)
 
 
 class DashboardDeleteView(
@@ -228,20 +239,54 @@ class UserListView(DashboardListView):
 class UserCreateView(DashboardCreateView):
     page_title = "Usuários"
     model = User
-    table_template = "dashboard/users_create.html"
+    fields = ["email", "first_name", "last_name", "groups"]
 
 
 class UserDetailView(DashboardDetailView):
     page_title = "Usuários"
     model = User
+    context_object_name = "user_obj"
+    fields = ["email", "first_name", "last_name", "groups", "last_login"]
 
 
 class UserUpdateView(DashboardUpdateView):
     page_title = "Usuários"
     model = User
-    fields = "__all__"
+    context_object_name = "user_obj"
+    fields = ["email", "first_name", "last_name", "groups"]
     success_url = "dashboard:user_list"
 
 
 class UserDeleteView(DashboardDeleteView):
     model = User
+    context_object_name = "user_obj"
+
+
+class GroupListView(DashboardListView):
+    page_title = "Grupos"
+    paginate_by = 10
+    model = Group
+    table_template = "dashboard/includes/groups_table.html"
+
+
+class GroupCreateView(DashboardCreateView):
+    page_title = "Grupos"
+    model = Group
+    fields = "__all__"
+
+
+class GroupDetailView(DashboardDetailView):
+    page_title = "Grupos"
+    model = Group
+    fields = "__all__"
+
+
+class GroupUpdateView(DashboardUpdateView):
+    page_title = "Grupos"
+    model = Group
+    fields = "__all__"
+    success_url = "dashboard:group_list"
+
+
+class GroupDeleteView(DashboardDeleteView):
+    model = Group

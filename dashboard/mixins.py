@@ -23,6 +23,10 @@ class AllowedActionsMixin:
         model_name = self.model._meta.model_name
         for action in self.actions:
             perm_string = f"{app_label}.{action}_{model_name}"
+            # As "list" is not a default permission,
+            # test "view" permission instead.
+            if action == "list":
+                perm_string = f"{app_label}.view_{model_name}"
             if self.request.user.has_perm(perm_string):
                 allowed_actions[action] = (
                     f"{self.request.resolver_match.namespace}:{model_name}_{action}"
