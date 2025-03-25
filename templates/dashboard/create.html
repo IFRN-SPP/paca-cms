@@ -9,7 +9,7 @@
 
 {% block app_content %}
 <div class="container">
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
     <div class="d-flex justify-content-between mt-3">
