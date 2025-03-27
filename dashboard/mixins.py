@@ -1,5 +1,7 @@
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
+from app.models import Publication
 
 
 class PageTitleMixin:
@@ -60,3 +62,22 @@ class AutoPermissionRequiredMixin(PermissionRequiredMixin):
             )
 
         return super().get_permission_required()
+
+
+class AutoPublicationFieldMixin:
+    def form_valid(self, form):
+        form.instance.publication = Publication.objects.first()
+        return super().form_valid(form)
+
+
+class DashboardBaseMixin(
+    AutoPermissionRequiredMixin, AllowedActionsMixin, PageTitleMixin
+):
+    pass
+
+
+class DashboardBaseEditMixin(DashboardBaseMixin):
+    def get_success_url(self):
+        model_name = self.model._meta.model_name
+        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
+        return reverse_lazy(success_url)

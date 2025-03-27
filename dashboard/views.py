@@ -7,13 +7,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from app.models import Publication, Issue, Page, Document
 from users.models import User
-from .mixins import PageTitleMixin, AllowedActionsMixin, AutoPermissionRequiredMixin
+from .mixins import (
+    PageTitleMixin,
+    AutoPublicationFieldMixin,
+    DashboardBaseMixin,
+    DashboardBaseEditMixin,
+)
 
 
 class DashboardListView(
-    AutoPermissionRequiredMixin,
-    AllowedActionsMixin,
-    PageTitleMixin,
+    DashboardBaseMixin,
     ListView,
 ):
     template_name = "dashboard/list.html"
@@ -27,9 +30,7 @@ class DashboardListView(
 
 
 class DashboardDetailView(
-    AutoPermissionRequiredMixin,
-    AllowedActionsMixin,
-    PageTitleMixin,
+    DashboardBaseMixin,
     DetailView,
 ):
     template_name = "dashboard/detail.html"
@@ -60,50 +61,20 @@ class DashboardDetailView(
         return context
 
 
-class DashboardCreateView(
-    AutoPermissionRequiredMixin,
-    AllowedActionsMixin,
-    PageTitleMixin,
-    CreateView,
-):
+class DashboardCreateView(DashboardBaseEditMixin, CreateView):
     template_name = "dashboard/create.html"
     permission_action = "add"
 
-    def get_success_url(self):
-        model_name = self.model._meta.model_name
-        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
-        return reverse_lazy(success_url)
 
-
-class DashboardUpdateView(
-    AutoPermissionRequiredMixin,
-    AllowedActionsMixin,
-    PageTitleMixin,
-    UpdateView,
-):
+class DashboardUpdateView(DashboardBaseEditMixin, UpdateView):
     template_name = "dashboard/update.html"
     permission_action = "change"
 
-    def get_success_url(self):
-        model_name = self.model._meta.model_name
-        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
-        return reverse_lazy(success_url)
 
-
-class DashboardDeleteView(
-    AutoPermissionRequiredMixin,
-    AllowedActionsMixin,
-    PageTitleMixin,
-    DeleteView,
-):
+class DashboardDeleteView(DashboardBaseEditMixin, DeleteView):
     page_title = "Remover"
     template_name = "dashboard/delete.html"
     permission_action = "delete"
-
-    def get_success_url(self):
-        model_name = self.model._meta.model_name
-        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
-        return reverse_lazy(success_url)
 
 
 class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
@@ -122,7 +93,8 @@ class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
 class PublicationDetailView(DashboardDetailView):
     page_title = "Publicação"
     model = Publication
-    fields = ["organization", "description"]
+    # fields = ["organization", "description"]
+    fields = "__all__"
     template_name = "dashboard/publication.html"
 
     def get_object(self, queryset=None):
@@ -147,11 +119,10 @@ class IssueListView(DashboardListView):
     table_template = "dashboard/includes/issues_table.html"
 
 
-class IssueCreateView(DashboardCreateView):
+class IssueCreateView(AutoPublicationFieldMixin, DashboardCreateView):
     page_title = "Edições"
     model = Issue
-    fields = "__all__"
-    success_url = reverse_lazy("dashboard:issue_list")
+    fields = ["title", "presentation", "file", "pub_date", "url", "is_published"]
 
 
 class IssueDetailView(DashboardDetailView):
@@ -162,8 +133,7 @@ class IssueDetailView(DashboardDetailView):
 class IssueUpdateView(DashboardUpdateView):
     page_title = "Edições"
     model = Issue
-    fields = "__all__"
-    success_url = reverse_lazy("dashboard:issue_list")
+    fields = ["title", "presentation", "file", "pub_date", "url", "is_published"]
 
 
 class IssueDeleteView(DashboardDeleteView):
@@ -177,11 +147,10 @@ class PageListView(DashboardListView):
     table_template = "dashboard/includes/pages_table.html"
 
 
-class PageCreateView(DashboardCreateView):
+class PageCreateView(AutoPublicationFieldMixin, DashboardCreateView):
     model = Page
     page_title = "Páginas"
-    fields = "__all__"
-    success_url = reverse_lazy("dashboard:page_list")
+    fields = ["title", "order", "page_type", "is_published"]
 
 
 class PageDetailView(DashboardDetailView):
@@ -192,8 +161,7 @@ class PageDetailView(DashboardDetailView):
 class PageUpdateView(DashboardUpdateView):
     model = Page
     page_title = "Páginas"
-    fields = "__all__"
-    success_url = reverse_lazy("dashboard:page_list")
+    fields = ["title", "order", "page_type", "is_published"]
 
 
 class PageDeleteView(DashboardDeleteView):
@@ -207,10 +175,10 @@ class DocumentListView(DashboardListView):
     table_template = "dashboard/includes/documents_table.html"
 
 
-class DocumentCreateView(DashboardCreateView):
+class DocumentCreateView(AutoPublicationFieldMixin, DashboardCreateView):
     page_title = "Documentos"
     model = Document
-    fields = "__all__"
+    fields = ["title", "category", "file", "is_published"]
 
 
 class DocumentDetailView(DashboardDetailView):
@@ -221,8 +189,7 @@ class DocumentDetailView(DashboardDetailView):
 class DocumentUpdateView(DashboardUpdateView):
     page_title = "Documentos"
     model = Document
-    fields = "__all__"
-    success_url = "dashboard:document_list"
+    fields = ["title", "category", "file", "is_published"]
 
 
 class DocumentDeleteView(DashboardDeleteView):
@@ -254,7 +221,6 @@ class UserUpdateView(DashboardUpdateView):
     model = User
     context_object_name = "user_obj"
     fields = ["email", "first_name", "last_name", "groups"]
-    success_url = "dashboard:user_list"
 
 
 class UserDeleteView(DashboardDeleteView):
@@ -285,7 +251,6 @@ class GroupUpdateView(DashboardUpdateView):
     page_title = "Grupos"
     model = Group
     fields = "__all__"
-    success_url = "dashboard:group_list"
 
 
 class GroupDeleteView(DashboardDeleteView):
