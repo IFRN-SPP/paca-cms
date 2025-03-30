@@ -3,8 +3,9 @@
     <tr>
       <th style="width: 10px">#</th>
       <th>Nome</th>
-      <th>E-mail</th>
+      <th>E-mails</th>
       <th>Grupos</th>
+      <th>Último acesso</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -12,14 +13,23 @@
     {% for tuser in page_obj %}
     <tr class="align-middle">
       <td>{{ tuser.id }}</td>
-      <td>{{ tuser.username }}</td>
-      <td>{{ tuser.email }}</td>
+      <td>{{ tuser.first_name }} {{ tuser.last_name }}</td>
+      <td>
+        {% for email in tuser.emailaddress_set.all  %}
+          {{ email }}{% if not forloop.last %}, {% endif %}    
+        {% empty %}
+          {{ tuser.email|default:"-" }}
+        {% endfor %}
+      </td>
       <td>
         {% for group in tuser.groups.all  %}
           {{ group }}{% if not forloop.last %}, {% endif %}    
         {% empty %}
         -
         {% endfor %}
+      </td>
+      <td>
+        {{ tuser.last_login|default:"-" }}
       </td>
       {% include "dashboard/includes/actions.html" with obj=tuser %}
     </tr>
