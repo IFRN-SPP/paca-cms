@@ -46,6 +46,12 @@ urlpatterns = [
     path("users/<int:pk>/", views.UserDetailView.as_view(), name="user_view"),
     path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="user_change"),
     path("users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="user_delete"),
+    path("users/profile", views.UserProfileView.as_view(), name="user_profile"),
+    path(
+        "users/profile/update/",
+        views.UserProfileUpdateView.as_view(),
+        name="user_profile_change",
+    ),
     path("groups/", views.GroupListView.as_view(), name="group_list"),
     path("groups/add", views.GroupCreateView.as_view(), name="group_add"),
     path("groups/<int:pk>/", views.GroupDetailView.as_view(), name="group_view"),

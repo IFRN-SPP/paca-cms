@@ -48,9 +48,7 @@ class DashboardDetailView(
                     {
                         "label": field.verbose_name,
                         "value": getattr(self.object, field.name),
-                        "safe": True
-                        if field.verbose_name in self.safe_fields
-                        else False,
+                        "safe": True if field.name in self.safe_fields else False,
                     }
                 )
         return selected_fields
@@ -93,7 +91,6 @@ class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
 class PublicationDetailView(DashboardDetailView):
     page_title = "Publicação"
     model = Publication
-    # fields = ["organization", "description"]
     fields = "__all__"
     template_name = "dashboard/publication.html"
 
@@ -255,3 +252,19 @@ class GroupUpdateView(DashboardUpdateView):
 
 class GroupDeleteView(DashboardDeleteView):
     model = Group
+
+
+class UserProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
+    page_title = "Perfil"
+    template_name = "dashboard/profile.html"
+
+
+class UserProfileUpdateView(LoginRequiredMixin, PageTitleMixin, UpdateView):
+    page_title = "Atualizar Perfil"
+    model = User
+    fields = ["first_name", "last_name"]
+    template_name = "dashboard/profile_edit.html"
+    success_url = reverse_lazy("dashboard:user_profile")
+
+    def get_object(self, queryset=None):
+        return self.request.user
