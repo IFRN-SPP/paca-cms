@@ -78,6 +78,9 @@ class DashboardBaseMixin(
 
 class DashboardBaseEditMixin(DashboardBaseMixin):
     def get_success_url(self):
-        model_name = self.model._meta.model_name
-        success_url = f"{self.request.resolver_match.namespace}:{model_name}_list"
-        return reverse_lazy(success_url)
+        if not self.success_url:
+            model_name = self.model._meta.model_name
+            self.success_url = reverse_lazy(
+                f"{self.request.resolver_match.namespace}:{model_name}_list"
+            )
+        return super().get_success_url()

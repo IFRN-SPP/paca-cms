@@ -103,7 +103,7 @@ class PublicationUpdateView(DashboardUpdateView):
     model = Publication
     fields = "__all__"
     template_name = "dashboard/publication_form.html"
-    success_url = reverse_lazy("dashboard:publication")
+    success_url = reverse_lazy("dashboard:publication_detail")
 
     def get_object(self, queryset=None):
         return Publication.objects.first()

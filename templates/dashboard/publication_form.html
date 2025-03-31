@@ -8,10 +8,12 @@
 {% endblock %}
 
 {% block app_content %}
-<form action="" method="post">
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
-  
-  <input type="submit" value="Atualizar">
+  {{ form }}
+  <div class="d-flex justify-content-between mt-3">
+    <a href="{% url 'dashboard:publication_detail' %}" class="btn btn-secondary">Voltar</a>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
 </form>
 {% endblock %}
