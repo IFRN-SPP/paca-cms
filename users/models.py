@@ -12,6 +12,10 @@ class User(AbstractUser):
 
     objects = CustomUserManager()
 
+    class Meta:
+        verbose_name = "Usuário"
+        verbose_name_plural = "Usuários"
+
     def save(self, *args, **kwargs):
         if not self.username:
             self.username = self.email
