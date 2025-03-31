@@ -1,5 +1,7 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import CreateView, DeleteView
 from django.core.exceptions import ImproperlyConfigured
 from app.models import Publication
 
@@ -76,7 +78,19 @@ class DashboardBaseMixin(
     pass
 
 
-class DashboardBaseEditMixin(DashboardBaseMixin):
+class DashboardBaseEditMixin(DashboardBaseMixin, SuccessMessageMixin):
+    success_message = "{model_name} {action}(a) com sucesso!"
+
+    def get_success_message(self, cleaned_data):
+        model_name = self.model._meta.verbose_name
+        if isinstance(self, CreateView):
+            action = "criado"
+        elif isinstance(self, DeleteView):
+            action = "removido"
+        else:
+            action = "atualizado"
+        return self.success_message.format(model_name=model_name, action=action)
+
     def get_success_url(self):
         if not self.success_url:
             model_name = self.model._meta.model_name

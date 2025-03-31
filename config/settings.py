@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
+from django.contrib.messages import constants as messages
 
 load_dotenv(find_dotenv())
 
@@ -187,6 +188,7 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 # config users
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "dashboard:index"
+LOGOUT_REDIRECT_URL = "dashboard:index"
 
 ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.SuapSocialAccountAdapter"
@@ -215,3 +217,7 @@ SOCIALACCOUNT_PROVIDERS = {
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 GOOGLETAG = os.getenv("GOOGLETAG")
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
