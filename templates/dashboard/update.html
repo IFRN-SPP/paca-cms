@@ -1,4 +1,9 @@
 {% extends "dashboard/list.html" %}
+{% load crispy_forms_tags %}
+
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
 
 {% block crumb %}
 {{ block.super }}
@@ -11,7 +16,7 @@
 <div class="container">
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form}}
+    {{form|crispy}}
     <div class="d-flex justify-content-between mt-3">
       <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
       <button type="submit" class="btn btn-primary">Salvar</button>

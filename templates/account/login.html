@@ -1,58 +1,57 @@
 {% extends "account/base_entrance.html" %}
+
 {% load i18n %}
-{% load allauth account %}
-{% block head_title %}
-    {% trans "Sign In" %}
-{% endblock head_title %}
+{% load allauth account socialaccount %}
+{% load static %}
+
+{% block title %} {% trans "Sign In" %} {% endblock %}
+
 {% block content %}
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% setvar link %}
-            <a href="{{ signup_url }}">
-            {% endsetvar %}
-            {% setvar end_link %}
-            </a>
-        {% endsetvar %}
-        {% element p %}
-            {% blocktranslate %}If you have not created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
-        {% endelement %}
-        {% url 'account_login' as login_url %}
-        {% element form form=form method="post" action=login_url tags="entrance,login" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" tags="prominent,login" %}
-                    {% trans "Sign In" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+  {% if SOCIALACCOUNT_ENABLED %}
+
+  <div class="social-auth-links text-center mb-3">
+    {% get_providers as socialaccount_providers %}
+      {% for provider in socialaccount_providers %}
+        {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
+        <a href="{{ href }}" class="btn btn-block btn-success text-light p-2">
+          <i class="fab  mr-2"></i>Acessar com o {{ provider.name }}
+        </a>
+      {% endfor %}
+    <p class="py-3 p-relative" style="border-bottom: 1px solid var(--gray); opacity: .3;" >
+      <span class="middle-border-bottom">
+          ou
+      </span>
+  </p>
+  </div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors  %}
+        <small class="text-danger mb-3">{{ error }}</small>
+      {% endfor %}
     {% endif %}
-    {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button_group vertical=True %}
-            {% if PASSKEY_LOGIN_ENABLED %}
-                {% element button type="submit" form="mfa_login" id="passkey_login" tags="prominent,login,outline,primary" %}
-                    {% trans "Sign in with a passkey" %}
-                {% endelement %}
-            {% endif %}
-            {% if LOGIN_BY_CODE_ENABLED %}
-                {% element button href=request_login_code_url tags="prominent,login,outline,primary" %}
-                    {% trans "Send me a sign-in code" %}
-                {% endelement %}
-            {% endif %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
+
+    {% for field in form %}
+      <div class="input-group mb-3">
+        {{field}}
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="bi {% if field.name == 'login' %} bi-at {% else %}  bi-lock {% endif %}"></span>
+          </div>
+        </div>
+      </div>
+      <small class="text-danger">{{ field.errors }}</small>
+    {% endfor %}
+      <div class="row">
+        <div class="col-4 mx-auto">
+          <button type="submit" class="btn btn-secondary btn-block">{% trans "Sign In" %}</button>
+        </div>
+      </div>
+  </form>
+  <p class="my-2 text-center">
+    <a href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a>
+  </p>
 {% endblock content %}
-{% block extra_body %}
-    {{ block.super }}
-    {% if PASSKEY_LOGIN_ENABLED %}
-        {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
-    {% endif %}
-{% endblock %}

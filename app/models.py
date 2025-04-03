@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.conf import settings
-from django_summernote.fields import SummernoteTextField
+from tinymce.models import HTMLField
 from autoslug import AutoSlugField
 from django.utils.translation import gettext_lazy as _
 import os
@@ -22,7 +22,7 @@ class Publication(models.Model):
     address = models.CharField(_("Endereço"), max_length=200, blank=True)
     phone = models.CharField(_("Telefone"), max_length=100, blank=True)
     email = models.EmailField(_("E-mail"), blank=True)
-    description = SummernoteTextField(_("Descrição"))
+    description = HTMLField(_("Descrição"))
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Data de atualização"), auto_now=True)
 
@@ -70,7 +70,7 @@ class Issue(models.Model):
         Publication, on_delete=models.PROTECT, verbose_name=_("Publicação")
     )
     title = models.CharField(_("Título"), max_length=20, null=True)
-    presentation = SummernoteTextField(_("Apresentação"), blank=True)
+    presentation = HTMLField(_("Apresentação"), blank=True)
     cover = models.ImageField(_("Capa"), upload_to="issue/", blank=True)
     file = models.FileField(
         _("Arquivo"),
@@ -152,7 +152,7 @@ class Text(models.Model):
     title = models.CharField(_("Título"), max_length=100, blank=True)
     subtitle = models.CharField(_("Subtítulo"), max_length=100, blank=True)
     order = models.IntegerField(_("Ordem"))
-    text = SummernoteTextField(_("Texto"))
+    text = HTMLField(_("Texto"))
     is_published = models.BooleanField(_("Publicado?"))
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)

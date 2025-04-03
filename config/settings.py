@@ -51,8 +51,10 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "django_summernote",
+    "tinymce",
     "auditlog",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 LOCAL_APPS = [
@@ -197,6 +199,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SESSION_REMEMBER = True
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 OPEN_FOR_SIGNUP = False
 
@@ -221,3 +224,6 @@ GOOGLETAG = os.getenv("GOOGLETAG")
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
