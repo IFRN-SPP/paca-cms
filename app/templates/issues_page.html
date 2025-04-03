@@ -2,18 +2,22 @@
 <div class="row row-cols-1 row-cols-md-3 justify-content-center">
 {% for issue in content %}
 <div class="col">
-  <div class="card mb-3" style="max-width: 30rem;">
+  <div class="card mb-3" style="max-width: 20rem;">
       <a href="{% url 'issue_detail' issue.id %}">
-        {% if issue.cover %}
-          <img src="{{ issue.cover.url }}" class="img-fluid border mt-3 rounded-start mx-auto d-block w-75" alt="Capa">
-        {% else %}
-          <img src="{% static 'img/placeholder/cover.png' %}" class="img-fluid border mt-3 rounded-start mx-auto d-block w-75" alt="Capa">
-        {% endif %}
+          <img
+          {% if issue.cover %}
+            src="{{ issue.cover.url }}"
+          {% else %}
+            src="{% static 'img/placeholder/cover.png' %}"
+          {% endif %}
+            class="img-fluid border mt-3 rounded-start mx-auto d-block w-75"
+            alt="Capa"
+          >
       </a>
       <div class="card-body text-center">
         <h5 class="card-title">{{ issue.title }}</h5>
         <p class="card-text"><small class="text-muted">Publicado em {{ issue.pub_date }}</small></p>
-        <a href="{% url 'issue_detail' issue.id %}" class="btn btn-primary">
+        <a href="{% url 'issue_detail' issue.id %}" class="btn btn-success">
           Detalhes
         </a>
       </div>

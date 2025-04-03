@@ -29,12 +29,14 @@
         {% endif %}
       </div>
       <div class="list-group py-4">
-        <div class="list-group-item mb-2">
+        <div class="list-group-item mb-2 bg-success">
+          <a class="d-block text-light text-start text-center text-decoration-none text-capitalize" 
           {% if issue.file %}
-          <a class="d-block text-light text-start text-decoration-none text-capitalize" href="{{ issue.file.url}}" target="_blank">
+            href="{{ issue.file.url}}" target="_blank"
           {% else %}
-          <a class="d-block text-light text-start text-decoration-none text-capitalize" href="#" disabled>
+            href="#" disabled
           {% endif %}
+          >
             <span class=" me-2"><i class="bi bi-download"></i></span>
             Download
           </a>
