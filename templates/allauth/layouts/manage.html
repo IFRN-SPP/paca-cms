@@ -1,0 +1,22 @@
+{% extends 'dashboard/private_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
+{% block page_title %}
+{% endblock %}
+
+{% block crumb %}
+{{ block.super }}
+<li class="breadcrumb-item">
+  <a href="{% url 'dashboard:publication_change' %}">{{page_title}}</a>
+</li>
+{% endblock %}
+
+{% block app_content %}
+  {% block content %}
+  {% endblock %}
+{% endblock %}
