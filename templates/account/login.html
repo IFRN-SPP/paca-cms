@@ -8,16 +8,15 @@
 
 {% block content %}
   {% if SOCIALACCOUNT_ENABLED %}
-
-  <div class="social-auth-links text-center mb-3">
+  <div class="social-auth-links text-center mb-3 d-grid gap-2">
     {% get_providers as socialaccount_providers %}
       {% for provider in socialaccount_providers %}
         {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
-        <a href="{{ href }}" class="btn btn-block btn-success text-light p-2">
+        <a href="{{ href }}" class="btn btn-success text-light p-2">
           <i class="fab  mr-2"></i>Acessar com o {{ provider.name }}
         </a>
       {% endfor %}
-    <p class="py-3 p-relative" style="border-bottom: 1px solid var(--gray); opacity: .3;" >
+    <p class="py-3 p-divider">
       <span class="middle-border-bottom">
           ou
       </span>
@@ -37,17 +36,17 @@
     {% for field in form %}
       <div class="input-group mb-3">
         {{field}}
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="bi {% if field.name == 'login' %} bi-at {% else %}  bi-lock {% endif %}"></span>
-          </div>
+        <div class="input-group-text">
+          <span class="bi {% if field.name == 'login' %} bi-at {% else %}  bi-lock {% endif %}"></span>
         </div>
       </div>
       <small class="text-danger">{{ field.errors }}</small>
     {% endfor %}
       <div class="row">
         <div class="col-4 mx-auto">
-          <button type="submit" class="btn btn-secondary btn-block">{% trans "Sign In" %}</button>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-secondary">{% trans "Sign In" %}</button>
+          </div>
         </div>
       </div>
   </form>

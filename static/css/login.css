@@ -1,0 +1,14 @@
+.p-divider{
+    position:relative;
+    border-bottom: 1px solid var(--bs-gray);
+    opacity: 0.4;
+}
+
+.middle-border-bottom{
+    position: absolute !important;
+    left: 50%;
+    bottom: -10px; /* Ajuste para centralizar verticalmente na borda */
+    transform: translateX(-50%)  !important;
+    background-color: white; /* Fundo branco */
+    padding: 0 10px; /* Espaçamento ao redor do texto */
+}

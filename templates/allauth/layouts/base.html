@@ -1,4 +1,9 @@
 {% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block title %}
   {% block head_title %}
@@ -10,7 +15,13 @@
 {% block app_wrapper %}
 <div class="login-box">
   <div class="login-logo">
-    <a href="{% url 'dashboard:index' %}"><strong>Paca</strong>CMS</a>
+    <a href="{% url 'dashboard:index' %}">
+      {% if publication.logo %}
+      <img src="{{ publication.logo.url }}" width="200px" alt="Logo">
+      {% else %}
+      <strong>Paca</strong>CMS
+      {% endif %}
+    </a>
   </div>
   <div class="card">
     <div class="card-body login-card-body">

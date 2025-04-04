@@ -193,16 +193,23 @@ LOGIN_REDIRECT_URL = "dashboard:index"
 LOGOUT_REDIRECT_URL = "dashboard:index"
 
 ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
-SOCIALACCOUNT_ADAPTER = "users.adapters.SuapSocialAccountAdapter"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SESSION_REMEMBER = True
-SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 OPEN_FOR_SIGNUP = False
 
+ACCOUNT_FORMS = {
+    "login": "users.forms.UserLoginForm",
+    "reset_password": "users.forms.UserResetPasswordForm",
+    "reset_password_from_key": "users.forms.UserResetPasswordKeyForm",
+}
+
+SOCIALACCOUNT_ADAPTER = "users.adapters.SuapSocialAccountAdapter"
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_PROVIDERS = {
     "suap": {
         "VERIFIED_EMAIL": True,
