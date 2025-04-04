@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, DeleteView
 from django.core.exceptions import ImproperlyConfigured
+from django.forms import inlineformset_factory
 from app.models import Publication
 
 
@@ -72,13 +73,42 @@ class AutoPublicationFieldMixin:
         return super().form_valid(form)
 
 
+class InlineFormsetMixin:
+    inline_model = None
+    inline_fields = None
+    formset_prefix = None
+    formset_extra = 1
+    can_delete = True
+
+    def get_formset_class(self):
+        return inlineformset_factory(
+            self.model,
+            self.inline_model,
+            fields=self.inline_fields,
+            extra=self.formset_extra,
+            can_delete=self.can_delete,
+        )
+
+    def get_formset(self):
+        Formset = self.get_formset_class()
+        return Formset(instance=self.get_object(), prefix=self.formset_prefix)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.inline_model:
+            context["formset"] = self.get_formset()
+        return context
+
+
 class DashboardBaseMixin(
     AutoPermissionRequiredMixin, AllowedActionsMixin, PageTitleMixin
 ):
     pass
 
 
-class DashboardBaseEditMixin(DashboardBaseMixin, SuccessMessageMixin):
+class DashboardBaseEditMixin(
+    DashboardBaseMixin, SuccessMessageMixin, InlineFormsetMixin
+):
     success_message = "{model_name} {action}(a) com sucesso!"
 
     def get_success_message(self, cleaned_data):

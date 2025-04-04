@@ -16,14 +16,16 @@
 <div class="container">
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    {{ formset.management_form }}
     {{form|crispy}}
+    {% for form_inline in formset  %}
+      {{form_inline|crispy}}
+      <hr>
+    {% endfor %}
     <div class="d-flex justify-content-between mt-3">
       <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
       <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
-    
   </form>
-
-
 </div>
 {% endblock %}

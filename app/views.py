@@ -37,7 +37,7 @@ class PagesDetailView(Unpublished404Mixin, DetailView):
             content = Issue.objects.filter(is_published=True)
         else:
             inner_template = "text_page.html"
-            content = page.text_set.filter(is_published=True)
+            content = page.text
 
         context["inner_template"] = inner_template
         context["content"] = content

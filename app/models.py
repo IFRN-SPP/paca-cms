@@ -123,7 +123,6 @@ class Issue(models.Model):
 class Page(models.Model):
     class PageType(models.TextChoices):
         DOWNLOADS = "DL", _("Downloads")
-        GALLERY = "GL", _("Galeria")
         TEXT = "TX", _("Texto")
         ISSUES = "IS", _("Edições")
 
@@ -133,6 +132,7 @@ class Page(models.Model):
     title = models.CharField(_("Título"), max_length=20)
     order = models.IntegerField(_("Ordem"))
     page_type = models.CharField(_("Tipo de página"), max_length=2, choices=PageType)
+    text = HTMLField(_("Texto"), blank=True)
     slug = AutoSlugField(populate_from="title", unique=True, default="", null=False)
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)
@@ -141,25 +141,6 @@ class Page(models.Model):
     class Meta:
         verbose_name = _("Página")
         verbose_name_plural = _("Páginas")
-        ordering = ["order"]
-
-    def __str__(self):
-        return self.title
-
-
-class Text(models.Model):
-    page = models.ForeignKey(Page, on_delete=models.PROTECT, verbose_name=_("Página"))
-    title = models.CharField(_("Título"), max_length=100, blank=True)
-    subtitle = models.CharField(_("Subtítulo"), max_length=100, blank=True)
-    order = models.IntegerField(_("Ordem"))
-    text = HTMLField(_("Texto"))
-    is_published = models.BooleanField(_("Publicado?"))
-    created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)
-
-    class Meta:
-        verbose_name = _("Texto")
-        verbose_name_plural = _("Textos")
         ordering = ["order"]
 
     def __str__(self):

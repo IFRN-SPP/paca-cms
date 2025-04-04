@@ -147,7 +147,7 @@ class PageListView(DashboardListView):
 class PageCreateView(AutoPublicationFieldMixin, DashboardCreateView):
     model = Page
     page_title = "Páginas"
-    fields = ["title", "order", "page_type", "is_published"]
+    fields = ["title", "order", "page_type", "text", "is_published"]
 
 
 class PageDetailView(DashboardDetailView):
@@ -158,7 +158,7 @@ class PageDetailView(DashboardDetailView):
 class PageUpdateView(DashboardUpdateView):
     model = Page
     page_title = "Páginas"
-    fields = ["title", "order", "page_type", "is_published"]
+    fields = ["title", "order", "page_type", "text", "is_published"]
 
 
 class PageDeleteView(DashboardDeleteView):

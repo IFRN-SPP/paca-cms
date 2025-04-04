@@ -1,9 +1,1 @@
-{% for text in content %}
-  {% if text.is_published %}
-    <h1 class="section-title">{{ text.title }}</h1>
-    <h2 class="section-title">{{ text.subtitle }}</h2>
-    {{ text.text | safe }}
-  {% endif %}
-{%empty%}
-  <h1>EM BREVE</h1>
-{% endfor %}
+{{ content | safe }}

@@ -3,7 +3,7 @@
     <tr>
       <th style="width: 10px">#</th>
       <th>Nome</th>
-      <th>E-mails</th>
+      <th>E-mail</th>
       <th>Grupos</th>
       <th>Último acesso</th>
       <th>Ações</th>
@@ -14,13 +14,7 @@
     <tr class="align-middle">
       <td>{{ tuser.id }}</td>
       <td>{{ tuser.first_name }} {{ tuser.last_name }}</td>
-      <td>
-        {% for email in tuser.emailaddress_set.all  %}
-          {{ email }}{% if not forloop.last %}, {% endif %}    
-        {% empty %}
-          {{ tuser.email|default:"-" }}
-        {% endfor %}
-      </td>
+      <td>{{ tuser.email }}</td>
       <td>
         {% for group in tuser.groups.all  %}
           {{ group }}{% if not forloop.last %}, {% endif %}    
