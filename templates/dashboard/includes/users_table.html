@@ -23,7 +23,7 @@
         {% endfor %}
       </td>
       <td>
-        {{ tuser.last_login|default:"-" }}
+        {{ tuser.last_login|default:"-"|date:"SHORT_DATE_FORMAT" }}
       </td>
       {% include "dashboard/includes/actions.html" with obj=tuser %}
     </tr>
