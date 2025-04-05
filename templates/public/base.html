@@ -98,6 +98,9 @@
             {% if publication.issn %}
             <p><small>ISSN: {{ publication.issn }}</small></p>
             {% endif %}
+            {% if publication.doi %}
+            <p><small>DOI: {{ publication.doi }}</small></p>
+            {% endif %}
           </div>
           <div class="col-md-5 ms-auto">
             <p class="mb-0"><strong>Contato:</strong></p>
