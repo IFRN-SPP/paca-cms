@@ -74,7 +74,7 @@
         {% if perms.users.view_user %}
         <li class="nav-item">
           <a href="{% url 'dashboard:user_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-people-fill"></i>
+            <i class="nav-icon bi bi-person-lines-fill"></i>
             <p>Usuários</p>
           </a>
         </li>
@@ -87,6 +87,15 @@
           </a>
         </li>
         {% endif %}
+        <li class="nav-item border-top">
+          <form action="{% url 'account_logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-dark fw-bolder shadow-none text-danger w-100">
+              <i class="nav-icon bi bi-box-arrow-left"></i>
+              <p>Sair</p>
+            </button>
+          </form>
+        </li>
       </ul>
       <!--end::Sidebar Menu-->
     </nav>
