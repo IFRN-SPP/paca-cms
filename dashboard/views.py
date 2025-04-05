@@ -154,6 +154,7 @@ class PageCreateView(AutoPublicationFieldMixin, DashboardCreateView):
 class PageDetailView(DashboardDetailView):
     model = Page
     page_title = "Páginas"
+    safe_fields = ["text"]
 
 
 class PageUpdateView(DashboardUpdateView):

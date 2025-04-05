@@ -16,7 +16,7 @@
       <div class="d-flex justify-content-between py-2 border-bottom">
         <strong>{{ field.label|capfirst }}</strong>
         {% if field.safe %}
-        <span><br>{{ field.value|safe }}</span>
+        <div class="flex-grow-1"><br>{{ field.value|safe }}</div>
         {% else %}
         <span>{{ field.value }}</span>
         {% endif %}
