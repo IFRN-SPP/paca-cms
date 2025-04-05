@@ -13,6 +13,7 @@ from .mixins import (
     DashboardBaseMixin,
     DashboardBaseEditMixin,
 )
+from .forms import IssueForm
 
 
 class DashboardListView(
@@ -119,7 +120,7 @@ class IssueListView(DashboardListView):
 class IssueCreateView(AutoPublicationFieldMixin, DashboardCreateView):
     page_title = "Edições"
     model = Issue
-    fields = ["title", "presentation", "file", "pub_date", "url", "is_published"]
+    form_class = IssueForm
 
 
 class IssueDetailView(DashboardDetailView):
@@ -130,7 +131,7 @@ class IssueDetailView(DashboardDetailView):
 class IssueUpdateView(DashboardUpdateView):
     page_title = "Edições"
     model = Issue
-    fields = ["title", "presentation", "file", "pub_date", "url", "is_published"]
+    form_class = IssueForm
 
 
 class IssueDeleteView(DashboardDeleteView):
@@ -262,7 +263,7 @@ class UserProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
 class UserProfileUpdateView(LoginRequiredMixin, PageTitleMixin, UpdateView):
     page_title = "Atualizar Perfil"
     model = User
-    fields = ["first_name", "last_name"]
+    fields = ["first_name", "last_name", "email"]
     template_name = "dashboard/profile_edit.html"
     success_url = reverse_lazy("dashboard:user_profile")
 
