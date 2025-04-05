@@ -9,7 +9,7 @@
         <div class="inner">
           <h3>{{ issues|default:"-" }}</h3>
           <p>Edições</p>
-        </div><i class="bi bi-link-45deg small-box-icon"></i>
+        </div><i class="bi bi-files small-box-icon"></i>
         <a href="{% url 'dashboard:issue_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
           Acessar<i class="bi bi-link-45deg"></i>
         </a>
@@ -22,7 +22,7 @@
         <div class="inner">
           <h3>{{ pages|default:"-" }}</h3>
           <p>Páginas</p>
-        </div>
+        </div><i class="bi bi-hand-index-thumb small-box-icon"></i>
         <a href="{% url 'dashboard:page_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
           Acessar<i class="bi bi-link-45deg"></i>
         </a>
@@ -35,7 +35,7 @@
         <div class="inner">
           <h3>{{ documents|default:"-" }}</h3>
           <p>Documentos</p>
-        </div>
+        </div><i class="bi bi-file-earmark-arrow-up-fill small-box-icon"></i>
         <a href="{% url 'dashboard:document_list' %}" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
           Acessar<i class="bi bi-link-45deg"></i>
         </a>
@@ -48,7 +48,7 @@
         <div class="inner">
           <h3>{{ users|default:"-" }}</h3>
           <p>Usuários</p>
-        </div>
+        </div><i class="bi bi-people-fill small-box-icon"></i>
         <a href="{% url 'dashboard:user_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
           Acessar<i class="bi bi-link-45deg"></i>
         </a>
