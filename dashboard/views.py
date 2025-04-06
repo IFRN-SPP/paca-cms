@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
-from app.models import Publication, Issue, Page, Document
+from app.models import Publication, Issue, Page, Document, SocialMedia
 from users.models import User
 from .mixins import (
     PageTitleMixin,
@@ -165,6 +165,34 @@ class PageUpdateView(DashboardUpdateView):
 
 class PageDeleteView(DashboardDeleteView):
     model = Page
+
+
+class SocialMediaListView(DashboardListView):
+    page_title = "Redes Sociais"
+    paginate_by = 10
+    model = SocialMedia
+    table_template = "dashboard/includes/socialmedia_table.html"
+
+
+class SocialMediaCreateView(AutoPublicationFieldMixin, DashboardCreateView):
+    page_title = "Redes Sociais"
+    model = SocialMedia
+    fields = ["url", "icon"]
+
+
+class SocialMediaDetailView(DashboardDetailView):
+    page_title = "Redes Sociais"
+    model = SocialMedia
+
+
+class SocialMediaUpdateView(DashboardUpdateView):
+    page_title = "Redes Sociais"
+    model = SocialMedia
+    fields = ["url", "icon"]
+
+
+class SocialMediaDeleteView(DashboardDeleteView):
+    model = SocialMedia
 
 
 class DocumentListView(DashboardListView):

@@ -24,6 +24,27 @@ urlpatterns = [
     path("pages/<int:pk>/", views.PageDetailView.as_view(), name="page_view"),
     path("pages/<int:pk>/update/", views.PageUpdateView.as_view(), name="page_change"),
     path("pages/<int:pk>/delete/", views.PageDeleteView.as_view(), name="page_delete"),
+    path("social_media/", views.SocialMediaListView.as_view(), name="socialmedia_list"),
+    path(
+        "social_media/add",
+        views.SocialMediaCreateView.as_view(),
+        name="socialmedia_add",
+    ),
+    path(
+        "social_media/<int:pk>/",
+        views.SocialMediaDetailView.as_view(),
+        name="socialmedia_view",
+    ),
+    path(
+        "social_media/<int:pk>/update/",
+        views.SocialMediaUpdateView.as_view(),
+        name="socialmedia_change",
+    ),
+    path(
+        "social_media/<int:pk>/delete/",
+        views.SocialMediaDeleteView.as_view(),
+        name="socialmedia_delete",
+    ),
     path("documents/", views.DocumentListView.as_view(), name="document_list"),
     path("documents/add", views.DocumentCreateView.as_view(), name="document_add"),
     path(

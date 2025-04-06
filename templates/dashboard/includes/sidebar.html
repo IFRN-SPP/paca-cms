@@ -37,12 +37,27 @@
         </li>
         {% if perms.app.view_publication %}
         <li class="nav-item">
-          <a href="{% url 'dashboard:publication_detail' %}" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="nav-icon bi bi-journals"></i>
             <p>
               Publicação
+              <i class="nav-arrow bi bi-chevron-right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'dashboard:publication_detail' %}" class="nav-link">
+                <i class="nav-icon bi bi-circle"></i>
+                <p>Informações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:socialmedia_list' %}" class="nav-link">
+                <i class="nav-icon bi bi-circle"></i>
+                <p>Redes Sociais</p>
+              </a>
+            </li>
+          </ul>
         </li>
         {% endif %}
         {% if perms.app.view_issue %}
