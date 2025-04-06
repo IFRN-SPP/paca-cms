@@ -5,7 +5,7 @@
 {% block bodyclass %}index{% endblock %}
 
 {% block page_header %}
-<header id="site-header" class="site-header" style="background: url({{ publication.backgroundimage_set.all.0 }}) no-repeat center; background-size: cover;"> 
+<header id="site-header" class="site-header" {% if publication.banner_image %}style="background: url({{ publication.banner_image.url }}) no-repeat center; background-size: cover;"{% endif %}> 
   <div class="intro" >
     <h1>{{ publication.title }}</h1>
     {% if publication.issn %}

@@ -16,6 +16,9 @@ class Publication(models.Model):
     promo_image = models.ImageField(
         _("Imagem promocional"), upload_to="publication/", blank=True
     )
+    banner_image = models.ImageField(
+        _("Imagem do Banner"), upload_to="publication/", blank=True
+    )
     issn = models.CharField(_("ISSN"), max_length=50, blank=True)
     doi = models.CharField(_("DOI"), max_length=50, blank=True)
     organization = models.CharField(_("Instituição"), max_length=100, blank=True)
@@ -47,22 +50,6 @@ class SocialMedia(models.Model):
 
     def __str__(self):
         return self.url
-
-
-class BackgroundImage(models.Model):
-    publication = models.ForeignKey(
-        Publication, on_delete=models.PROTECT, verbose_name=_("Publicação")
-    )
-    order = models.IntegerField(_("Ordem"))
-    image = models.ImageField(_("Imagem"), upload_to="background/")
-
-    class Meta:
-        verbose_name = _("Imagem de fundo")
-        verbose_name_plural = _("Imagens de fundo")
-        ordering = ["order"]
-
-    def __str__(self):
-        return self.image.url
 
 
 class Issue(models.Model):
