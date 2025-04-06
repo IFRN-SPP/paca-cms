@@ -14,7 +14,10 @@
   <div class="row">
     <div class="col-md-8">
       {{ issue.presentation | safe }}
-      <p><strong>Data de publicação</strong>: {{ issue.pub_date }}</p>
+      <p class="mb-0"><strong>Data de publicação</strong>: {{ issue.pub_date }}</p>
+      {% if issue.url %}
+      <p><strong>Link</strong>: <a href="{{ issue.url }}">{{ issue.url }}</a></p>
+      {% endif %}
     </div>
     <div class="col-md-4 p-3">
       <div>
