@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
     "auditlog",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_htmx",
 ]
 
 LOCAL_APPS = [
@@ -75,6 +76,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "auditlog.middleware.AuditlogMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"

@@ -27,7 +27,13 @@
   <div class="d-flex justify-content-between mt-3">
     <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
     {% if "delete" in allowed_actions %}
-    <a href="{% url allowed_actions.delete object.id %}" class="btn btn-danger">Remover</a>
+    <button
+      hx-get="{% url allowed_actions.delete object.id %}"
+      hx-target=".modal-content"
+      hx-trigger="click"
+      data-bs-toggle="modal"
+      data-bs-target="#modals-here"
+      class="btn btn-danger">Remover</button>
     {% endif %}
     {% if "change" in allowed_actions %}
     <a href="{% url allowed_actions.change object.id %}" class="btn btn-primary" role="button">Atualizar</a>

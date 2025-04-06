@@ -73,7 +73,13 @@ class DashboardUpdateView(DashboardBaseEditMixin, UpdateView):
 class DashboardDeleteView(DashboardBaseEditMixin, DeleteView):
     page_title = "Remover"
     template_name = "dashboard/delete.html"
+    template_name_modal = "dashboard/includes/delete_modal.html"
     permission_action = "delete"
+
+    def get_template_names(self):
+        if not self.request.htmx:
+            return [self.template_name]
+        return [self.template_name_modal]
 
 
 class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):

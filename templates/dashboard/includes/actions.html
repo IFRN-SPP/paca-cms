@@ -6,6 +6,12 @@
   <a href="{% url allowed_actions.change obj.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
   {% endif %}
   {% if "delete" in allowed_actions %}
-  <a href="{% url allowed_actions.delete obj.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+  <button
+    hx-get="{% url allowed_actions.delete obj.id %}"
+    hx-target=".modal-content"
+    hx-trigger="click"
+    data-bs-toggle="modal"
+    data-bs-target="#modals-here"
+    class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
   {% endif %}
 </td>

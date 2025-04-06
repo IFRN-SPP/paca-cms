@@ -1,4 +1,4 @@
-{% load static %}
+{% load static django_htmx %}
 <!doctype html>
 <html lang="pt-br">
   <!--begin::Head-->
@@ -36,6 +36,7 @@
       href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta3/dist/css/adminlte.min.css"
       crossorigin="anonymous"
     />
+    {% htmx_script %}
     {% block extra_head %} {% endblock %}
     <!--end::Required Plugin(AdminLTE)-->
   </head>
