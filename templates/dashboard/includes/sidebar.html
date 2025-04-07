@@ -1,3 +1,4 @@
+{% load simple_menu %}
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
   <!--begin::Sidebar Brand-->
   <div class="sidebar-brand">
@@ -27,81 +28,32 @@
         role="menu"
         data-accordion="false"
       >
-        <li class="nav-item">
-          <a href="{% url 'dashboard:index' %}" class="nav-link">
-            <i class="nav-icon bi bi-house-fill"></i>
+        {% generate_menu %}
+        {% for item in menus.dashboard  %}
+        <li class="nav-item {% if item.selected and item.children %}menu-open{% endif %}">
+          <a href="{{ item.url }}" class="nav-link {% if item.selected %}active{% endif %}">
+            <i class="nav-icon {{ item.icon }}"></i>
             <p>
-              Início
-            </p>
-          </a>
-        </li>
-        {% if perms.app.view_publication %}
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-journals"></i>
-            <p>
-              Publicação
+              {{ item.title }}
+              {% if item.children %}
               <i class="nav-arrow bi bi-chevron-right"></i>
+              {% endif %}
             </p>
           </a>
+          {% if item.children %}
           <ul class="nav nav-treeview">
+            {% for subitem in item.children  %}
             <li class="nav-item">
-              <a href="{% url 'dashboard:publication_detail' %}" class="nav-link">
-                <i class="nav-icon bi bi-circle"></i>
-                <p>Informações</p>
+              <a href="{{ subitem.url }}" class="nav-link {% if subitem.selected %}active{% endif %}">
+                <i class="nav-icon {{ subitem.icon }}"></i>
+                <p>{{ subitem.title }}</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{% url 'dashboard:socialmedia_list' %}" class="nav-link">
-                <i class="nav-icon bi bi-circle"></i>
-                <p>Redes Sociais</p>
-              </a>
-            </li>
+            {% endfor %}
           </ul>
+          {% endif %}
         </li>
-        {% endif %}
-        {% if perms.app.view_issue %}
-        <li class="nav-item">
-          <a href="{% url 'dashboard:issue_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-files"></i>
-            <p>
-              Edições
-            </p>
-          </a>
-        </li>
-        {% endif %}
-        {% if perms.app.view_page %}
-        <li class="nav-item">
-          <a href="{% url 'dashboard:page_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-hand-index-thumb"></i>
-            <p>Páginas</p>
-          </a>
-        </li>
-        {% endif %}
-        {% if perms.app.view_document %}
-        <li class="nav-item">
-          <a href="{% url 'dashboard:document_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-file-earmark-arrow-up-fill"></i>
-            <p>Documentos</p>
-          </a>
-        </li>
-        {% endif %}
-        {% if perms.users.view_user %}
-        <li class="nav-item">
-          <a href="{% url 'dashboard:user_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-person-lines-fill"></i>
-            <p>Usuários</p>
-          </a>
-        </li>
-        {% endif %}
-        {% if perms.auth.view_group %}
-        <li class="nav-item">
-          <a href="{% url 'dashboard:group_list' %}" class="nav-link">
-            <i class="nav-icon bi bi-people-fill"></i>
-            <p>Grupos</p>
-          </a>
-        </li>
-        {% endif %}
+        {% endfor %}
         <li class="nav-item border-top">
           <form action="{% url 'account_logout' %}" method="post">
             {% csrf_token %}
