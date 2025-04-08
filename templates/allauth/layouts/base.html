@@ -1,4 +1,4 @@
-{% extends 'dashboard/base.html' %}
+{% extends 'cms/base.html' %}
 {% load static %}
 
 {% block extra_head %}
@@ -15,7 +15,7 @@
 {% block app_wrapper %}
 <div class="login-box">
   <div class="login-logo">
-    <a href="{% url 'dashboard:index' %}">
+    <a href="{% url 'cms:index' %}">
       {% if publication.logo %}
       <img src="{{ publication.logo.url }}" width="200px" alt="Logo">
       {% else %}

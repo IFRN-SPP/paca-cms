@@ -60,10 +60,10 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "suap_oauth",
     "users",
-    "app",
-    "dashboard",
+    "cms",
+    "website",
+    "suap_oauth",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -94,7 +94,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "app.context_processors.publication_data",
+                "website.context_processors.publication_data",
             ],
         },
     },

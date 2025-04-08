@@ -1,0 +1,44 @@
+{% load static %}
+<div class="row row-cols-1 row-cols-md-3 justify-content-center">
+{% for issue in page_obj %}
+<div class="col">
+  <div class="card mb-3" style="max-width: 20rem;">
+      <a href="{% url 'website:issue_detail' issue.id %}">
+          <img
+          {% if issue.cover %}
+            src="{{ issue.cover.url }}"
+          {% else %}
+            src="{% static 'img/placeholder/cover.png' %}"
+          {% endif %}
+            class="img-fluid border mt-3 rounded-start mx-auto d-block w-75"
+            alt="Capa"
+          >
+      </a>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ issue.title }}</h5>
+        <p class="card-text"><small class="text-muted">Publicado em {{ issue.pub_date }}</small></p>
+        <a href="{% url 'website:issue_detail' issue.id %}" class="btn btn-success">
+          Detalhes
+        </a>
+      </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% if paginator.num_pages > 1 %}
+<ul class="pagination justify-content-center">
+  <li class="page-item {{  page_obj.has_previous|yesno:',disabled,disabled'  }}">
+    <a class="page-link" href="{% if page_obj.has_previous %}{% querystring page=page_obj.previous_page_number %}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+  {% for page in paginator.page_range %}
+  <li class="page-item"><a class="page-link {% if page_obj.number == page %}active{% endif %}" href="{% querystring page=page %}">{{page}}</a></li>
+  {% endfor %}
+  <li class="page-item {{  page_obj.has_next|yesno:',disabled,disabled'  }}">
+    <a class="page-link" href="{% if page_obj.has_next %}{% querystring page=page_obj.next_page_number %}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
+</ul>
+{% endif %}

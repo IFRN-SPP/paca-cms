@@ -1,0 +1,71 @@
+{% load simple_menu %}
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+  <!--begin::Sidebar Brand-->
+  <div class="sidebar-brand">
+    <!--begin::Brand Link-->
+    <a href="{% url 'website:index' %}" class="brand-link">
+      {% if publication.logo %}
+      <img
+        src="{{ publication.logo.url }}"
+        alt="Logo"
+        class="brand-image opacity-75 shadow"
+        style="filter: brightness(100);"
+      />
+      {% else %}
+      <span class="brand-text fw-light">{{ publication.short_title }}</span>
+      {% endif %}
+    </a>
+    <!--end::Brand Link-->
+  </div>
+  <!--end::Sidebar Brand-->
+  <!--begin::Sidebar Wrapper-->
+  <div class="sidebar-wrapper">
+    <nav class="mt-2">
+      <!--begin::Sidebar Menu-->
+      <ul
+        class="nav sidebar-menu flex-column"
+        data-lte-toggle="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        {% generate_menu %}
+        {% for item in menus.cms  %}
+        <li class="nav-item {% if item.selected and item.children %}menu-open{% endif %}">
+          <a href="{{ item.url }}" class="nav-link {% if item.selected %}active{% endif %}">
+            <i class="nav-icon {{ item.icon }}"></i>
+            <p>
+              {{ item.title }}
+              {% if item.children %}
+              <i class="nav-arrow bi bi-chevron-right"></i>
+              {% endif %}
+            </p>
+          </a>
+          {% if item.children %}
+          <ul class="nav nav-treeview">
+            {% for subitem in item.children  %}
+            <li class="nav-item">
+              <a href="{{ subitem.url }}" class="nav-link {% if subitem.selected %}active{% endif %}">
+                <i class="nav-icon {{ subitem.icon }}"></i>
+                <p>{{ subitem.title }}</p>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+        <li class="nav-item border-top">
+          <form action="{% url 'account_logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-dark fw-bolder shadow-none text-danger w-100">
+              <i class="nav-icon bi bi-box-arrow-left"></i>
+              <p>Sair</p>
+            </button>
+          </form>
+        </li>
+      </ul>
+      <!--end::Sidebar Menu-->
+    </nav>
+  </div>
+  <!--end::Sidebar Wrapper-->
+</aside>

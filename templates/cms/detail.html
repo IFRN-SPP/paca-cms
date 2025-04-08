@@ -1,0 +1,43 @@
+{% extends "cms/list.html" %}
+
+{% block crumb %}
+{{ block.super }}
+<li class="breadcrumb-item">
+  <a href="{{ request.get_full_path }}">{{page_title}}</a>
+</li>
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+  <h2 class="mb-4">{{ object|capfirst }}</h2>
+
+  <div class="mb-4">
+    {% for field in fields %}
+      <div class="d-flex justify-content-between py-2 border-bottom">
+        <strong>{{ field.label|capfirst }}</strong>
+        {% if field.safe %}
+        <div class="flex-grow-1"><br>{{ field.value|safe }}</div>
+        {% else %}
+        <span>{{ field.value }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
+    {% if "delete" in allowed_actions %}
+    <button
+      hx-get="{% url allowed_actions.delete object.id %}"
+      hx-target=".modal-content"
+      hx-trigger="click"
+      data-bs-toggle="modal"
+      data-bs-target="#modals-here"
+      class="btn btn-danger">Remover</button>
+    {% endif %}
+    {% if "change" in allowed_actions %}
+    <a href="{% url allowed_actions.change object.id %}" class="btn btn-primary" role="button">Atualizar</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

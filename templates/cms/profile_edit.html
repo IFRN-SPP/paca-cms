@@ -1,0 +1,23 @@
+{% extends "cms/private_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block crumb %}
+{{ block.super }}
+<li class="breadcrumb-item">
+  <a href="{{ request.get_full_path }}">{{page_title}}</a>
+</li>
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+  <h2 class="mb-4">{{ user|capfirst }}</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="d-flex justify-content-between mt-3">
+      <a href="{% url 'users:user_profile' %}" class="btn btn-secondary">Voltar</a>
+      <button type="submit" class="btn btn-primary">Atualizar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
