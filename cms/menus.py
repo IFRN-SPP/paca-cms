@@ -77,6 +77,6 @@ Menu.add_item(
         "Grupos",
         reverse("users:group_list"),
         icon="bi bi-people-fill",
-        check=lambda r: r.user.has_perm("users.view_group"),
+        check=lambda r: r.user.has_perm("auth.view_group"),
     ),
 )
