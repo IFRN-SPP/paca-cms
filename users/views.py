@@ -13,6 +13,7 @@ from cms.views import (
     CmsUpdateView,
     CmsDeleteView,
 )
+from .tables import UserTable, GroupTable
 
 User = get_user_model()
 
@@ -44,7 +45,7 @@ class UserListView(ExcludeAdminMixin, CmsListView):
     page_title = "Usuários"
     paginate_by = 10
     model = User
-    table_template = "cms/includes/users_table.html"
+    table_class = UserTable
 
 
 class UserCreateView(CmsCreateView):
@@ -76,7 +77,7 @@ class GroupListView(CmsListView):
     page_title = "Grupos"
     paginate_by = 10
     model = Group
-    table_template = "cms/includes/groups_table.html"
+    table_class = GroupTable
 
     def get_queryset(self):
         return Group.objects.all().order_by("name")

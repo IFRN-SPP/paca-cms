@@ -1,17 +1,17 @@
-<td class="text-nowrap">
+<div class="text-nowrap">
   {% if "view" in allowed_actions %}
-  <a href="{% url allowed_actions.view obj.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+  <a href="{% url allowed_actions.view record.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
   {% endif %}
   {% if "change" in allowed_actions %}
-  <a href="{% url allowed_actions.change obj.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
+  <a href="{% url allowed_actions.change record.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
   {% endif %}
   {% if "delete" in allowed_actions %}
   <button
-    hx-get="{% url allowed_actions.delete obj.id %}"
+    hx-get="{% url allowed_actions.delete record.id %}"
     hx-target=".modal-content"
     hx-trigger="click"
     data-bs-toggle="modal"
     data-bs-target="#modals-here"
     class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
   {% endif %}
-</td>
+</div>

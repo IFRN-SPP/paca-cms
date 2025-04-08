@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
+from django_tables2 import SingleTableMixin
 from .models import Publication, Issue, Page, Document, SocialMedia
 from .mixins import (
     PageTitleMixin,
@@ -13,22 +14,18 @@ from .mixins import (
     CmsBaseEditMixin,
 )
 from .forms import IssueForm
+from .tables import IssueTable, PageTable, SocialMediaTable, DocumentTable
 
 User = get_user_model()
 
 
 class CmsListView(
     CmsBaseMixin,
+    SingleTableMixin,
     ListView,
 ):
     template_name = "cms/list.html"
     permission_action = "view"
-    table_template = ""
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["table_template"] = self.table_template
-        return context
 
 
 class CmsDetailView(
@@ -121,7 +118,7 @@ class IssueListView(CmsListView):
     page_title = "Edições"
     paginate_by = 10
     model = Issue
-    table_template = "cms/includes/issues_table.html"
+    table_class = IssueTable
 
 
 class IssueCreateView(AutoPublicationFieldMixin, CmsCreateView):
@@ -149,7 +146,7 @@ class PageListView(CmsListView):
     page_title = "Páginas"
     paginate_by = 10
     model = Page
-    table_template = "cms/includes/pages_table.html"
+    table_class = PageTable
 
 
 class PageCreateView(AutoPublicationFieldMixin, CmsCreateView):
@@ -178,7 +175,7 @@ class SocialMediaListView(CmsListView):
     page_title = "Redes Sociais"
     paginate_by = 10
     model = SocialMedia
-    table_template = "cms/includes/socialmedia_table.html"
+    table_class = SocialMediaTable
 
 
 class SocialMediaCreateView(AutoPublicationFieldMixin, CmsCreateView):
@@ -206,7 +203,7 @@ class DocumentListView(CmsListView):
     page_title = "Documentos"
     paginate_by = 10
     model = Document
-    table_template = "cms/includes/documents_table.html"
+    table_class = DocumentTable
 
 
 class DocumentCreateView(AutoPublicationFieldMixin, CmsCreateView):
