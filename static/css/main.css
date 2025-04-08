@@ -131,6 +131,16 @@ body.index .navbar-custom {
   z-index: -1; /* Coloca o gradiente atrás do conteúdo */
 }
 
+.pagination .page-link {
+  color: #555;
+}
+
+.pagination .page-link.active {
+  background-color: #666;
+  border-color: #ddd;
+  color: #fff;
+}
+
 .site-branding {
   float: left;
   margin-top: 0;

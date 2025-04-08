@@ -1,6 +1,6 @@
 {% load static %}
 <div class="row row-cols-1 row-cols-md-3 justify-content-center">
-{% for issue in content %}
+{% for issue in page_obj %}
 <div class="col">
   <div class="card mb-3" style="max-width: 20rem;">
       <a href="{% url 'issue_detail' issue.id %}">
@@ -25,3 +25,20 @@
 </div>
 {% endfor %}
 </div>
+{% if paginator.num_pages > 1 %}
+<ul class="pagination justify-content-center">
+  <li class="page-item {{  page_obj.has_previous|yesno:',disabled,disabled'  }}">
+    <a class="page-link" href="{% if page_obj.has_previous %}{% querystring page=page_obj.previous_page_number %}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+  {% for page in paginator.page_range %}
+  <li class="page-item"><a class="page-link {% if page_obj.number == page %}active{% endif %}" href="{% querystring page=page %}">{{page}}</a></li>
+  {% endfor %}
+  <li class="page-item {{  page_obj.has_next|yesno:',disabled,disabled'  }}">
+    <a class="page-link" href="{% if page_obj.has_next %}{% querystring page=page_obj.next_page_number %}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
+</ul>
+{% endif %}
