@@ -1,6 +1,6 @@
 from allauth.account.views import PasswordResetFromKeyView
 from django.urls import reverse_lazy
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
@@ -22,7 +22,18 @@ class ExcludeAdminMixin:
 
     def get_queryset(self):
         base_qs = super().get_queryset()
-        return base_qs.exclude(id=self.admin_id)
+        return base_qs.exclude(id=self.admin_id).order_by("id")
+
+
+class FilterPermissionsMixin:
+    allowed_apps = ["auth", "users", "cms"]
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["permissions"].queryset = Permission.objects.filter(
+            content_type__app_label__in=self.allowed_apps
+        )
+        return form
 
 
 class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
@@ -67,8 +78,11 @@ class GroupListView(CmsListView):
     model = Group
     table_template = "cms/includes/groups_table.html"
 
+    def get_queryset(self):
+        return Group.objects.all().order_by("name")
 
-class GroupCreateView(CmsCreateView):
+
+class GroupCreateView(FilterPermissionsMixin, CmsCreateView):
     page_title = "Grupos"
     model = Group
     fields = "__all__"
@@ -80,7 +94,7 @@ class GroupDetailView(CmsDetailView):
     fields = "__all__"
 
 
-class GroupUpdateView(CmsUpdateView):
+class GroupUpdateView(FilterPermissionsMixin, CmsUpdateView):
     page_title = "Grupos"
     model = Group
     fields = "__all__"
