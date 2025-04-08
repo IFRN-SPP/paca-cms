@@ -4,8 +4,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 from .models import Publication, Issue, Page, Document, SocialMedia
-from users.models import User
 from .mixins import (
     PageTitleMixin,
     AutoPublicationFieldMixin,
@@ -13,6 +13,8 @@ from .mixins import (
     CmsBaseEditMixin,
 )
 from .forms import IssueForm
+
+User = get_user_model()
 
 
 class CmsListView(
