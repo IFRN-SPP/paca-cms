@@ -56,7 +56,7 @@ class Issue(models.Model):
     publication = models.ForeignKey(
         Publication, on_delete=models.PROTECT, verbose_name=_("Publicação")
     )
-    title = models.CharField(_("Título"), max_length=20, null=True)
+    title = models.CharField(_("Título"), max_length=100, null=True)
     presentation = HTMLField(_("Apresentação"), blank=True)
     cover = models.ImageField(_("Capa"), upload_to="issue/", blank=True)
     file = models.FileField(
@@ -116,7 +116,7 @@ class Page(models.Model):
     publication = models.ForeignKey(
         Publication, on_delete=models.PROTECT, verbose_name=_("Publicação")
     )
-    title = models.CharField(_("Título"), max_length=20)
+    title = models.CharField(_("Título"), max_length=50)
     order = models.IntegerField(_("Ordem"))
     page_type = models.CharField(_("Tipo de página"), max_length=2, choices=PageType)
     text = HTMLField(_("Texto"), blank=True)
