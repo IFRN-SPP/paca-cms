@@ -17,7 +17,7 @@ submenu_items = [
         "Redes Sociais",
         reverse("cms:socialmedia_list"),
         icon="bi bi-circle",
-        check=lambda r: r.user.has_perm("app.view_socialmedia"),
+        check=lambda r: r.user.has_perm("cms.view_socialmedia"),
     ),
 ]
 Menu.add_item(
@@ -27,7 +27,7 @@ Menu.add_item(
         "#",
         icon="bi bi-journals",
         children=submenu_items,
-        check=lambda r: r.user.has_perm("app.view_publication"),
+        check=lambda r: r.user.has_perm("cms.view_publication"),
     ),
 )
 
@@ -37,7 +37,7 @@ Menu.add_item(
         "Edições",
         reverse("cms:issue_list"),
         icon="bi bi-files",
-        check=lambda r: r.user.has_perm("app.view_issue"),
+        check=lambda r: r.user.has_perm("cms.view_issue"),
     ),
 )
 
@@ -47,7 +47,7 @@ Menu.add_item(
         "Páginas",
         reverse("cms:page_list"),
         icon="bi bi-hand-index-thumb",
-        check=lambda r: r.user.has_perm("app.view_page"),
+        check=lambda r: r.user.has_perm("cms.view_page"),
     ),
 )
 
@@ -57,7 +57,7 @@ Menu.add_item(
         "Documentos",
         reverse("cms:document_list"),
         icon="bi bi-file-earmark-arrow-up-fill",
-        check=lambda r: r.user.has_perm("app.view_document"),
+        check=lambda r: r.user.has_perm("cms.view_document"),
     ),
 )
 

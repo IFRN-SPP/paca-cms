@@ -202,8 +202,8 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 # config users
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "account_login"
-LOGIN_REDIRECT_URL = "dashboard:index"
-LOGOUT_REDIRECT_URL = "dashboard:index"
+LOGIN_REDIRECT_URL = "cms:index"
+LOGOUT_REDIRECT_URL = "cms:index"
 
 ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
 ACCOUNT_EMAIL_VERIFICATION = "none"
