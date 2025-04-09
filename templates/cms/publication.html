@@ -26,7 +26,7 @@
 
   <div class="d-flex justify-content-between mt-3">
     <a href="{% url 'cms:index' %}" class="btn btn-secondary">Voltar</a>
-    {% if perms.app.change_publication %}
+    {% if perms.cms.change_publication %}
     <a href="{% url 'cms:publication_change' %}" class="btn btn-primary" role="button">Atualizar</a>
     {% endif %}
   </div>
