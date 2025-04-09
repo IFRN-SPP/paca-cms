@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth_suap",
     "tinymce",
     "auditlog",
     "crispy_forms",
@@ -65,7 +66,6 @@ LOCAL_APPS = [
     "users",
     "cms",
     "website",
-    "suap_oauth",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -232,12 +232,12 @@ SOCIALACCOUNT_PROVIDERS = {
     "suap": {
         "VERIFIED_EMAIL": True,
         "EMAIL_AUTHENTICATION": True,
-        "APPS": [
-            {
-                "client_id": os.getenv("SUAP_CLIENT_ID"),
-                "secret": os.getenv("SUAP_CLIENT_SECRET"),
-            },
-        ],
+        "SUAP_URL": "https://suap.ifrn.edu.br",
+        "SCOPE": ["identificacao", "email"],
+        "APP": {
+            "client_id": os.getenv("SUAP_CLIENT_ID"),
+            "secret": os.getenv("SUAP_CLIENT_SECRET"),
+        },
     }
 }
 

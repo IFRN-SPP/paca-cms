@@ -9,6 +9,7 @@ cryptography==44.0.1
 distlib==0.3.9
 Django==5.1.6
 django-allauth==65.4.1
+django-allauth-suap==0.1.2
 django-auditlog==3.0.0
 django-autoslug==1.9.9
 django-crispy-forms==2.3
