@@ -82,7 +82,7 @@ class CmsDeleteView(CmsBaseEditMixin, DeleteView):
 
 class IndexView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     template_name = "cms/index.html"
-    page_title = "Cms"
+    page_title = "Dashboard"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
