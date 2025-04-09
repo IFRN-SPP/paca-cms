@@ -51,6 +51,9 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100 {% block bodyclass %}{% endblock bodyclass %}" >
+    {% if preview %}
+    <div class="ribbon">Prévia</div>
+    {% endif %}
     <nav id="site-nav" class="navbar navbar-expand-md fixed-top navbar-custom" data-bs-theme="dark">
       <div class="container">
         <!-- logo -->
@@ -81,6 +84,7 @@
       </div>
     </nav>
 
+
     {% block page_header %}
     {% endblock %}
 
@@ -92,7 +96,7 @@
     <footer class="pt-5 text-bg-dark mt-auto align-items-bottom" data-bs-theme="dark">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 mb-3">
             <p class="mb-0"><strong>{{ publication.title }}</strong></p>
             <p class="mb-0">{{ publication.organization }}</p>
             {% if publication.issn %}

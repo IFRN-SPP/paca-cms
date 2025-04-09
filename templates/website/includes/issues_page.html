@@ -1,7 +1,7 @@
 {% load static %}
 <div class="row row-cols-1 row-cols-md-3 justify-content-center">
 {% for issue in page_obj %}
-<div class="col">
+<div class="col d-flex justify-content-center mx-2 align-items-center">
   <div class="card mb-3" style="max-width: 20rem;">
       <a href="{% url 'website:issue_detail' issue.id %}">
           <img
