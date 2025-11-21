@@ -61,8 +61,8 @@ jobs:
         run: |
           ssh ${{ secrets.SERVER_USER_DEV }}@${{ secrets.SERVER_DEV }} << 'EOF'
           cd ${{ secrets.LOCATION_DEV }}
-          docker compose -f compose.yml up --build -d
-          docker compose -f compose.yml run --rm django python manage.py migrate
+          docker compose -f compose.yaml up --build -d
+          docker compose -f compose.yaml run --rm django python manage.py migrate
           EOF
 
   deploy_prod:
@@ -94,7 +94,7 @@ jobs:
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER }} << 'EOF'
           cd ${{ secrets.LOCATION }}
-          docker compose -f compose.yml up --build -d
-          docker compose -f compose.yml run --rm django python manage.py migrate
+          docker compose -f compose.yaml up --build -d
+          docker compose -f compose.yaml run --rm django python manage.py migrate
           EOF
 
