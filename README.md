@@ -21,4 +21,4 @@ A página principal da publicação, além de apresentar o título em destaque, 
 - https://cbissn.ibict.br/formulario/ 
 - https://doity.com.br/blog/como-solicitar-o-issn/
 
-## [Documentação](doc/main.md)
+## [Documentação](doc/)
