@@ -95,6 +95,5 @@ jobs:
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER }} << 'EOF'
           cd ${{ secrets.LOCATION }}
           docker compose -f compose.yaml up --build -d
-          docker compose -f compose.yaml run --rm django python manage.py migrate
           EOF
 

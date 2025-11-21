@@ -9,18 +9,16 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install system dependencies for building
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     gcc \
     python3-dev \
+    musl-dev \
     libpq-dev \
-    pkg-config \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libffi-dev \
+    pkg-config libcairo2-dev libpango1.0-dev libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-COPY requirements*.txt ./
+COPY requirements* /app/
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements-prod.txt
 
@@ -35,29 +33,34 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install runtime dependencies only
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     postgresql-client \
     libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user
-RUN addgroup --system django && adduser --system --ingroup django django
+# Copy Python dependencies from builder
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 
-# Create necessary directories and assign permissions
-RUN mkdir -p /run/sockets /app/staticfiles /app/media && \
-    chown -R django:django /app /run/sockets
+# Copy project
+COPY . /app/
 
-# Copy dependencies from builder
-COPY --from=builder /usr/local /usr/local
+# Create socket directory
+RUN mkdir -p /run/sockets
 
-# Copy app code and ensure ownership
-COPY --chown=django:django . /app
+# Create staticfiles directory for collected static
+RUN mkdir -p /app/staticfiles
 
-# Copy entrypoint
-COPY --chown=django:django entrypoint.sh /app/
+# Create media directory
+RUN mkdir -p /app/media
+
+# Set permissions
+RUN chmod -R 755 /app/staticfiles /app/media
+
+# Copy entrypoint script
+COPY entrypoint.sh /app/
 RUN chmod +x /app/entrypoint.sh
 
-USER django
-
 EXPOSE 8000
+
 ENTRYPOINT ["/app/entrypoint.sh"]
