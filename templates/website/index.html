@@ -7,7 +7,7 @@
 {% block page_header %}
 <header id="site-header" class="site-header" {% if publication.banner_image %}style="background: url({{ publication.banner_image.url }}) no-repeat center; background-size: cover;"{% endif %}> 
   <div class="intro" >
-    <h1>{{ publication.title }}</h1>
+    <h1 class="w-75 mx-auto mt-5 mt-md-0">{{ publication.title }}</h1>
     {% if publication.issn %}
     <h4>ISSN: {{ publication.issn }}
     {% if publication.doi %}
@@ -15,7 +15,7 @@
     {% endif %}
     {% endif %}
     {% if publication.issue_set.last %}
-    <a class="btn btn-success text-light mt-4" href="{% url 'website:issue_detail' publication.issue_set.last.id %}">Edição Atual{% if publication.issue_set.last.volume or publication.issue_set.last.number %} ({% if publication.issue_set.last.volume %}V. {{ publication.issue_set.last.volume }}{% endif %}{% if publication.issue_set.last.volume and publication.issue_set.last.number %}, {% endif %}{% if publication.issue_set.last.number %}N. {{ publication.issue_set.last.number }}{% endif %}, {{ publication.issue_set.last.pub_date|date:"Y" }}){% endif %}</a>
+    <a class="btn btn-success text-light mt-4 mb-4" href="{% url 'website:issue_detail' publication.issue_set.last.id %}">Edição Atual{% if publication.issue_set.last.volume or publication.issue_set.last.number %} ({% if publication.issue_set.last.volume %}V. {{ publication.issue_set.last.volume }}{% endif %}{% if publication.issue_set.last.volume and publication.issue_set.last.number %}, {% endif %}{% if publication.issue_set.last.number %}N. {{ publication.issue_set.last.number }}{% endif %}, {{ publication.issue_set.last.pub_date|date:"Y" }}){% endif %}</a>
     {% endif %}
   </div>
 </header>
@@ -31,7 +31,7 @@
     {% if publication.description|length <= 1500 %}
     <div class="row">
       <div class="col-md-6">
-        <div class="text-justify">{{ publication.description|safe }}</div>
+        <div class="text-justify rich-text">{{ publication.description|safe }}</div>
       </div><!-- /.col-sm-6 -->
 
       <div class="col-md-6">
@@ -48,11 +48,11 @@
     <div class="row">
     {% with publication.description|split_text as split_text %}
       <div class="col-sm-6">
-        <div class="text-justify">{{ split_text.0 |safe}}</div>
+        <div class="text-justify rich-text">{{ split_text.0 |safe}}</div>
       </div><!-- /.col-sm-6 -->
 
       <div class="col-sm-6">
-        <div class="text-justify">{{ split_text.1 |safe}}</div>
+        <div class="text-justify rich-text">{{ split_text.1 |safe}}</div>
       </div><!-- /.col-sm-6 -->
     {% endwith %}
     </div><!-- /.row -->

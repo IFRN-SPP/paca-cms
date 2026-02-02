@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col-md-8">
-      {{ issue.presentation | safe }}
+      <div class="rich-text">{{ issue.presentation | safe }}</div>
       <p class="mb-0"><strong>Data de publicação</strong>: {{ issue.pub_date }}</p>
       {% if issue.url %}
       <p><strong>Link</strong>: <a href="{{ issue.url }}">{{ issue.url }}</a></p>
