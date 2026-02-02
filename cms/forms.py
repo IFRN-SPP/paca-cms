@@ -5,7 +5,16 @@ from .models import Issue, Document, Page
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ["title", "presentation", "file", "pub_date", "url", "is_published"]
+        fields = [
+            "title",
+            "volume",
+            "number",
+            "presentation",
+            "file",
+            "pub_date",
+            "url",
+            "is_published",
+        ]
         widgets = {
             "pub_date": forms.DateInput(
                 format="%Y-%m-%d",

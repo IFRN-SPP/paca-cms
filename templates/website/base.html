@@ -57,13 +57,12 @@
     <nav id="site-nav" class="navbar navbar-expand-md fixed-top navbar-custom" data-bs-theme="dark">
       <div class="container">
         <!-- logo -->
-        <div class="navbar-brand">
-          <a class="portal-logo text-reset text-decoration-none" href="{% url 'website:index' %}">
+        <div class="navbar-brand d-flex align-items-center">
+          <a class="portal-logo text-reset text-decoration-none d-flex align-items-center" href="{% url 'website:index' %}">
             {% if publication.logo %}
             <img src="{{ publication.logo.url }}" alt="Logo">
-            {% else %}
-            <h5>{{ publication.short_title }}</h5>
             {% endif %}
+            <span class="ms-2 text-light fw-semibold">{{ publication.title }}</span>
           </a>
         </div>
         <button class="navbar-toggler border border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false" aria-label="Toggle navigation">

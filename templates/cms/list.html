@@ -13,14 +13,24 @@
 {% endblock %}
 
 {% block app_content %}
-{% if "add" in allowed_actions %}
-<div class="pb-2 d-flex">
-  <a class="ms-auto me-2" href="{% url allowed_actions.add %}">
-    <button class="btn btn-primary">Novo</button>
-  </a>
+<div class="container-fluid">
+  {% if "add" in allowed_actions %}
+  <div class="row mb-3">
+    <div class="col-12 text-end">
+      <a href="{% url allowed_actions.add %}" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-1"></i>Novo
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline card-primary">
+        <div class="card-body p-0">
+          {% render_table table %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endif %}
-
-{% render_table table %}
-
 {% endblock %}

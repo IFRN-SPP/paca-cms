@@ -1,10 +1,11 @@
 import django_tables2
-from .models import Issue, Page, Document
+from django.utils.html import format_html
+from .models import Issue, Page, Document, SocialMedia
 
 
 class CmsTable(django_tables2.Table):
     actions = django_tables2.TemplateColumn(
-        template_name="cms/includes/actions.html",  # 👈 load from file
+        template_name="cms/includes/actions.html",
         orderable=False,
         verbose_name="Ações",
         exclude_from_export=True,
@@ -14,7 +15,15 @@ class CmsTable(django_tables2.Table):
 class IssueTable(CmsTable):
     class Meta:
         model = Issue
-        fields = ("title", "created_at", "updated_at", "pub_date", "is_published")
+        fields = (
+            "title",
+            "volume",
+            "number",
+            "created_at",
+            "updated_at",
+            "pub_date",
+            "is_published",
+        )
 
 
 class PageTable(CmsTable):
@@ -24,9 +33,18 @@ class PageTable(CmsTable):
 
 
 class SocialMediaTable(CmsTable):
+    icon_preview = django_tables2.Column(
+        empty_values=(),
+        orderable=False,
+        verbose_name="Preview",
+    )
+
+    def render_icon_preview(self, record):
+        return format_html('<i class="{} fs-4"></i>', record.icon)
+
     class Meta:
-        model = Page
-        fields = ("url", "icon")
+        model = SocialMedia
+        fields = ("url", "icon", "icon_preview")
 
 
 class DocumentTable(CmsTable):
