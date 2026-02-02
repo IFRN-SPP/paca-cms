@@ -9,9 +9,10 @@
         <div class="inner">
           <h3>{{ issues|default:"-" }}</h3>
           <p>Edições</p>
-        </div><i class="bi bi-files small-box-icon"></i>
+        </div>
+        <i class="bi bi-journal-richtext small-box-icon"></i>
         <a href="{% url 'cms:issue_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-          Acessar<i class="bi bi-link-45deg"></i>
+          Acessar <i class="bi bi-arrow-right-circle ms-1"></i>
         </a>
       </div>
     </div>
@@ -22,9 +23,10 @@
         <div class="inner">
           <h3>{{ pages|default:"-" }}</h3>
           <p>Páginas</p>
-        </div><i class="bi bi-hand-index-thumb small-box-icon"></i>
+        </div>
+        <i class="bi bi-file-earmark-text small-box-icon"></i>
         <a href="{% url 'cms:page_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-          Acessar<i class="bi bi-link-45deg"></i>
+          Acessar <i class="bi bi-arrow-right-circle ms-1"></i>
         </a>
       </div>
     </div>
@@ -35,9 +37,10 @@
         <div class="inner">
           <h3>{{ documents|default:"-" }}</h3>
           <p>Documentos</p>
-        </div><i class="bi bi-file-earmark-arrow-up-fill small-box-icon"></i>
+        </div>
+        <i class="bi bi-file-earmark-arrow-up small-box-icon"></i>
         <a href="{% url 'cms:document_list' %}" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
-          Acessar<i class="bi bi-link-45deg"></i>
+          Acessar <i class="bi bi-arrow-right-circle ms-1"></i>
         </a>
       </div>
     </div>
@@ -48,9 +51,10 @@
         <div class="inner">
           <h3>{{ users|default:"-" }}</h3>
           <p>Usuários</p>
-        </div><i class="bi bi-people-fill small-box-icon"></i>
+        </div>
+        <i class="bi bi-people small-box-icon"></i>
         <a href="{% url 'users:user_list' %}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-          Acessar<i class="bi bi-link-45deg"></i>
+          Acessar <i class="bi bi-arrow-right-circle ms-1"></i>
         </a>
       </div>
     </div>

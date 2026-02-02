@@ -1,9 +1,13 @@
-<div class="text-nowrap">
+<div class="btn-group btn-group-sm" role="group">
   {% if "view" in allowed_actions %}
-  <a href="{% url allowed_actions.view record.id %}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+  <a href="{% url allowed_actions.view record.id %}" class="btn btn-info" title="Visualizar">
+    <i class="bi bi-eye"></i>
+  </a>
   {% endif %}
   {% if "change" in allowed_actions %}
-  <a href="{% url allowed_actions.change record.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i></a>
+  <a href="{% url allowed_actions.change record.id %}" class="btn btn-warning" title="Editar">
+    <i class="bi bi-pencil"></i>
+  </a>
   {% endif %}
   {% if "delete" in allowed_actions %}
   <button
@@ -12,6 +16,9 @@
     hx-trigger="click"
     data-bs-toggle="modal"
     data-bs-target="#modals-here"
-    class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+    class="btn btn-danger"
+    title="Remover">
+    <i class="bi bi-trash"></i>
+  </button>
   {% endif %}
 </div>

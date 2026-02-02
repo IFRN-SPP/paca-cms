@@ -8,36 +8,56 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container">
-  <h2 class="mb-4">{{ object|capfirst }}</h2>
-
-  <div class="mb-4">
-    {% for field in fields %}
-      <div class="d-flex justify-content-between py-2 border-bottom">
-        <strong>{{ field.label|capfirst }}</strong>
-        {% if field.safe %}
-        <div class="flex-grow-1"><br>{{ field.value|safe }}</div>
-        {% else %}
-        <span>{{ field.value }}</span>
-        {% endif %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ object|capfirst }}</h3>
+          <div class="card-tools">
+            {% if "change" in allowed_actions %}
+            <a href="{% url allowed_actions.change object.id %}" class="btn btn-primary btn-sm">
+              <i class="bi bi-pencil me-1"></i>Editar
+            </a>
+            {% endif %}
+            {% if "delete" in allowed_actions %}
+            <button
+              hx-get="{% url allowed_actions.delete object.id %}"
+              hx-target=".modal-content"
+              hx-trigger="click"
+              data-bs-toggle="modal"
+              data-bs-target="#modals-here"
+              class="btn btn-danger btn-sm">
+              <i class="bi bi-trash me-1"></i>Remover
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <tbody>
+              {% for field in fields %}
+              <tr>
+                <th style="width: 200px;">{{ field.label|capfirst }}</th>
+                <td>
+                  {% if field.safe %}
+                  {{ field.value|safe }}
+                  {% else %}
+                  {{ field.value }}
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <a href="{% url allowed_actions.list %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Voltar
+          </a>
+        </div>
       </div>
-    {% endfor %}
-  </div>
-
-  <div class="d-flex justify-content-between mt-3">
-    <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
-    {% if "delete" in allowed_actions %}
-    <button
-      hx-get="{% url allowed_actions.delete object.id %}"
-      hx-target=".modal-content"
-      hx-trigger="click"
-      data-bs-toggle="modal"
-      data-bs-target="#modals-here"
-      class="btn btn-danger">Remover</button>
-    {% endif %}
-    {% if "change" in allowed_actions %}
-    <a href="{% url allowed_actions.change object.id %}" class="btn btn-primary" role="button">Atualizar</a>
-    {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -13,17 +13,29 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container">
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form|crispy}}
-    <div class="d-flex justify-content-between mt-3">
-      <a href="{% url allowed_actions.list %}" class="btn btn-secondary">Voltar</a>
-      <button type="submit" class="btn btn-primary">Salvar</button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Novo {{ page_title }}</h3>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-body">
+            {{ form|crispy }}
+          </div>
+          <div class="card-footer">
+            <a href="{% url allowed_actions.list %}" class="btn btn-secondary">
+              <i class="bi bi-arrow-left me-1"></i>Voltar
+            </a>
+            <button type="submit" class="btn btn-primary float-end">
+              <i class="bi bi-check-lg me-1"></i>Salvar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    
-  </form>
-
-
+  </div>
 </div>
 {% endblock %}

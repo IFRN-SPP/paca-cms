@@ -8,27 +8,43 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container">
-  <h2 class="mb-4">{{ user|capfirst }}</h2>
-
-  <div class="mb-4">
-    <div class="d-flex justify-content-between py-2 border-bottom">
-      <strong>Nome</strong>
-      <span>{{ user.first_name }}</span>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ user|capfirst }}</h3>
+          <div class="card-tools">
+            <a href="{% url 'users:user_profile_change' %}" class="btn btn-primary btn-sm">
+              <i class="bi bi-pencil me-1"></i>Editar
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th style="width: 150px;">Nome</th>
+                <td>{{ user.first_name }}</td>
+              </tr>
+              <tr>
+                <th>Sobrenome</th>
+                <td>{{ user.last_name }}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'cms:index' %}" onclick="window.history.back(); return false;" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Voltar
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="d-flex justify-content-between py-2 border-bottom">
-      <strong>Sobrenome</strong>
-      <span>{{ user.last_name }}</span>
-    </div>
-    <div class="d-flex justify-content-between py-2 border-bottom">
-      <strong>Email</strong>
-      <span>{{ user.email }}</span>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-between mt-3">
-    <a href="{% url 'cms:index' %}" onclick="window.history.back(); return false;" class="btn btn-secondary">Voltar</a>
-    <a href="{% url 'users:user_profile_change' %}" class="btn btn-primary" role="button">Atualizar Dados</a>
   </div>
 </div>
 {% endblock %}

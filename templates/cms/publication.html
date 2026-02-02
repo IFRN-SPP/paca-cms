@@ -8,27 +8,45 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container">
-  <h2 class="mb-4">{{ object|capfirst }}</h2>
-
-  <div class="mb-4">
-    {% for field in fields %}
-      <div class="d-flex justify-content-between py-2 border-bottom">
-        <strong>{{ field.label|capfirst }}</strong>
-        {% if field.safe %}
-        <span><br>{{ field.value|safe }}</span>
-        {% else %}
-        <span>{{ field.value }}</span>
-        {% endif %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ object|capfirst }}</h3>
+          {% if perms.cms.change_publication %}
+          <div class="card-tools">
+            <a href="{% url 'cms:publication_change' %}" class="btn btn-primary btn-sm">
+              <i class="bi bi-pencil me-1"></i>Editar
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <tbody>
+              {% for field in fields %}
+              <tr>
+                <th style="width: 200px;">{{ field.label|capfirst }}</th>
+                <td>
+                  {% if field.safe %}
+                  {{ field.value|safe }}
+                  {% else %}
+                  {{ field.value }}
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'cms:index' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Voltar
+          </a>
+        </div>
       </div>
-    {% endfor %}
-  </div>
-
-  <div class="d-flex justify-content-between mt-3">
-    <a href="{% url 'cms:index' %}" class="btn btn-secondary">Voltar</a>
-    {% if perms.cms.change_publication %}
-    <a href="{% url 'cms:publication_change' %}" class="btn btn-primary" role="button">Atualizar</a>
-    {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}

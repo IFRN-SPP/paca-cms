@@ -9,15 +9,29 @@
 {% endblock %}
 
 {% block app_content %}
-<div class="container">
-  <h2 class="mb-4">{{ user|capfirst }}</h2>
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="d-flex justify-content-between mt-3">
-      <a href="{% url 'users:user_profile' %}" class="btn btn-secondary">Voltar</a>
-      <button type="submit" class="btn btn-primary">Atualizar</button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Editar Perfil</h3>
+        </div>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            {{ form|crispy }}
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'users:user_profile' %}" class="btn btn-secondary">
+              <i class="bi bi-arrow-left me-1"></i>Voltar
+            </a>
+            <button type="submit" class="btn btn-primary float-end">
+              <i class="bi bi-check-lg me-1"></i>Salvar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </form>
+  </div>
 </div>
 {% endblock %}
