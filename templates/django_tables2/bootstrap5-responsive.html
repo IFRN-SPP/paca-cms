@@ -9,9 +9,22 @@
                 <thead {{ table.attrs.thead.as_html }}>
                 <tr>
                 {% for column in table.columns %}
-                    <th {{ column.attrs.th.as_html }} scope="col">
+                    <th {{ column.attrs.th.as_html }} scope="col" {% if column.orderable %}class="orderable {% if column.is_ordered %}{{ column.order_by_alias.is_descending|yesno:'desc,asc' }}{% endif %}"{% endif %}>
                         {% if column.orderable %}
-                            <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>
+                            <a class="text-reset text-decoration-none d-flex align-items-center" href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">
+                                {{ column.header }}
+                                <span class="ms-auto">
+                                    {% if column.is_ordered %}
+                                        {% if column.order_by_alias.is_descending %}
+                                            <i class="bi bi-sort-down"></i>
+                                        {% else %}
+                                            <i class="bi bi-sort-up"></i>
+                                        {% endif %}
+                                    {% else %}
+                                        <i class="bi bi-arrow-down-up opacity-25"></i>
+                                    {% endif %}
+                                </span>
+                            </a>
                         {% else %}
                             {{ column.header }}
                         {% endif %}
