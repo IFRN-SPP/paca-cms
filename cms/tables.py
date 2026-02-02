@@ -14,7 +14,15 @@ class CmsTable(django_tables2.Table):
 class IssueTable(CmsTable):
     class Meta:
         model = Issue
-        fields = ("title", "created_at", "updated_at", "pub_date", "is_published")
+        fields = (
+            "title",
+            "volume",
+            "number",
+            "created_at",
+            "updated_at",
+            "pub_date",
+            "is_published",
+        )
 
 
 class PageTable(CmsTable):

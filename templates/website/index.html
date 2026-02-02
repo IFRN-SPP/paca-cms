@@ -15,8 +15,7 @@
     {% endif %}
     {% endif %}
     {% if publication.issue_set.last %}
-    <p>Publicado em {{ publication.issue_set.last.pub_date }}</p>
-    <a class="btn btn-success text-light" href="{% url 'website:issue_detail' publication.issue_set.last.id %}">Edição Atual</a>
+    <a class="btn btn-success text-light mt-4" href="{% url 'website:issue_detail' publication.issue_set.last.id %}">Edição Atual{% if publication.issue_set.last.volume or publication.issue_set.last.number %} ({% if publication.issue_set.last.volume %}V. {{ publication.issue_set.last.volume }}{% endif %}{% if publication.issue_set.last.volume and publication.issue_set.last.number %}, {% endif %}{% if publication.issue_set.last.number %}N. {{ publication.issue_set.last.number }}{% endif %}, {{ publication.issue_set.last.pub_date|date:"Y" }}){% endif %}</a>
     {% endif %}
   </div>
 </header>

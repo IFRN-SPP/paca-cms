@@ -31,6 +31,7 @@
         </a>
         {% endif %}
       </div>
+      <p class="text-center py-2 mb-0">{% if issue.volume %}<strong>Volume</strong>: {{ issue.volume }} | {% endif %}{% if issue.number %}<strong>Número</strong>: {{ issue.number }} | {% endif %}<strong>Ano</strong>: {{ issue.pub_date|date:"Y" }}</p>
       <div class="list-group py-4">
         <div class="list-group-item mb-2 bg-success">
           <a class="d-block text-light text-start text-center text-decoration-none text-capitalize" 

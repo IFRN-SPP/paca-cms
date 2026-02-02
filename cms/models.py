@@ -67,6 +67,8 @@ class Issue(models.Model):
     )
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)
+    volume = models.CharField(_("Volume"), max_length=10, blank=True)
+    number = models.CharField(_("Número"), max_length=10, blank=True)
     pub_date = models.DateField(_("Data de publicação"))
     url = models.URLField(_("URL"), blank=True)
     is_published = models.BooleanField(_("Publicado?"), default=False)

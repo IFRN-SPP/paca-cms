@@ -47,6 +47,10 @@ h6 {
   padding: 70px 0;
 }
 
+body.index .section {
+  padding-top: 30px;
+}
+
 .section-title {
   letter-spacing: 1px;
   margin: 0 0 20px;
@@ -149,8 +153,8 @@ body.index .navbar-custom {
 
 .site-header {
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  height: 33vh;
+  min-height: 33vh;
   position: relative;
   text-align: center;
   display: table;
@@ -173,10 +177,10 @@ body.index .navbar-custom {
   text-transform: uppercase;
   width: 100%;
   z-index: 1;
-  padding: 0 15px;
+  padding: 80px 15px 0;
   display: table-cell;
   vertical-align: middle;
-  height: 100vh;
+  height: 33vh;
 }
 
 .site-header .intro h2 {
