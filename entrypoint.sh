@@ -22,6 +22,7 @@ echo "Starting Gunicorn..."
 exec gunicorn --bind unix:/run/sockets/anais_expotec.sock \
 	--workers 3 \
 	--timeout 60 \
+    --umask 007 \
 	--access-logfile - \
 	--error-logfile - \
 	config.wsgi:application
