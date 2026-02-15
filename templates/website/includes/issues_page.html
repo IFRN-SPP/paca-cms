@@ -17,7 +17,7 @@
       <div class="card-body text-center">
         <h5 class="card-title">{{ issue.title }}</h5>
         {% if issue.volume or issue.number %}<p class="card-text mb-1"><small class="text-muted">{% if issue.volume %}Vol. {{ issue.volume }}{% endif %}{% if issue.volume and issue.number %}, {% endif %}{% if issue.number %}N. {{ issue.number }}{% endif %}</small></p>{% endif %}
-        <p class="card-text"><small class="text-muted">Publicado em {{ issue.pub_date }}</small></p>
+        <p class="card-text"><small class="text-muted">{{ issue.pub_date|date:"Y" }}</small></p>
         <a href="{% url 'website:issue_detail' issue.id %}" class="btn btn-success">
           Detalhes
         </a>

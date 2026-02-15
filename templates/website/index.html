@@ -14,8 +14,8 @@
      - DOI: {{ publication.doi }}</h4>
     {% endif %}
     {% endif %}
-    {% if publication.issue_set.last %}
-    <a class="btn btn-success text-light mt-4 mb-4" href="{% url 'website:issue_detail' publication.issue_set.last.id %}">Edição Atual{% if publication.issue_set.last.volume or publication.issue_set.last.number %} ({% if publication.issue_set.last.volume %}V. {{ publication.issue_set.last.volume }}{% endif %}{% if publication.issue_set.last.volume and publication.issue_set.last.number %}, {% endif %}{% if publication.issue_set.last.number %}N. {{ publication.issue_set.last.number }}{% endif %}, {{ publication.issue_set.last.pub_date|date:"Y" }}){% endif %}</a>
+    {% if publication.issue_set.first %}
+    <a class="btn btn-success text-light mt-4 mb-4" href="{% url 'website:issue_detail' publication.issue_set.first.id %}">Edição Atual{% if publication.issue_set.first.volume or publication.issue_set.first.number %} ({% if publication.issue_set.first.volume %}V. {{ publication.issue_set.first.volume }}{% endif %}{% if publication.issue_set.first.volume and publication.issue_set.first.number %}, {% endif %}{% if publication.issue_set.first.number %}N. {{ publication.issue_set.first.number }}{% endif %}, {{ publication.issue_set.first.pub_date|date:"Y" }}){% endif %}</a>
     {% endif %}
   </div>
 </header>
