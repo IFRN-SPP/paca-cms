@@ -114,6 +114,8 @@ class Page(models.Model):
         DOWNLOADS = "DL", _("Downloads")
         TEXT = "TX", _("Texto")
         ISSUES = "IS", _("Edições")
+        LINK = "LK", _("Link")
+        CURRENT_ISSUE = "CI", _("Edição Atual")
 
     publication = models.ForeignKey(
         Publication, on_delete=models.PROTECT, verbose_name=_("Publicação")
@@ -122,6 +124,7 @@ class Page(models.Model):
     order = models.IntegerField(_("Ordem"))
     page_type = models.CharField(_("Tipo de página"), max_length=2, choices=PageType)
     text = HTMLField(_("Texto"), blank=True)
+    link_address = models.URLField(_("Endereço do link"), blank=True)
     slug = AutoSlugField(populate_from="title", unique=True, default="", null=False)
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)

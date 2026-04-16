@@ -152,7 +152,7 @@ class PageListView(CmsListView):
 class PageCreateView(AutoPublicationFieldMixin, CmsCreateView):
     model = Page
     page_title = "Páginas"
-    fields = ["title", "order", "page_type", "text", "is_published"]
+    fields = ["title", "order", "page_type", "text", "link_address", "is_published"]
 
 
 class PageDetailView(CmsDetailView):
@@ -164,7 +164,7 @@ class PageDetailView(CmsDetailView):
 class PageUpdateView(CmsUpdateView):
     model = Page
     page_title = "Páginas"
-    fields = ["title", "order", "page_type", "text", "is_published"]
+    fields = ["title", "order", "page_type", "text", "link_address", "is_published"]
 
 
 class PageDeleteView(CmsDeleteView):
