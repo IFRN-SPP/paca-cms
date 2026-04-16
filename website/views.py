@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.db.models import QuerySet
+from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.core.paginator import Paginator
@@ -24,6 +25,19 @@ class PagesDetailView(Unpublished404Mixin, DetailView):
     context_object_name = "page"
     issue_paginate_by = 6
     download_paginate_by = 10
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.page_type == Page.PageType.LINK:
+            return redirect(self.object.link_address)
+        if self.object.page_type == Page.PageType.CURRENT_ISSUE:
+            latest = Issue.objects.filter(
+                is_published=True, publication=self.object.publication
+            ).first()
+            if latest is None:
+                raise Http404()
+            return redirect("website:issue_detail", pk=latest.pk)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
