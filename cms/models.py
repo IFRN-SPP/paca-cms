@@ -125,7 +125,9 @@ class Page(models.Model):
     page_type = models.CharField(_("Tipo de página"), max_length=2, choices=PageType)
     text = HTMLField(_("Texto"), blank=True)
     link_address = models.URLField(_("Endereço do link"), blank=True)
-    slug = AutoSlugField(populate_from="title", unique=True, default="", null=False)
+    slug = AutoSlugField(
+        populate_from="title", unique=True, always_update=True, default="", null=False
+    )
     created_at = models.DateTimeField(_("Data de criação"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Última modificação"), auto_now=True)
     is_published = models.BooleanField(_("Publicado?"))
